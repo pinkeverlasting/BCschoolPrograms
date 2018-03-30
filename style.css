@@ -1,0 +1,76 @@
+
+
+
+#selection {
+    /*background-color: #e7c84c;*/
+}
+
+#selection .imageheader {
+    background: -webkit-linear-gradient(top, transparent, #e7c84c), url(../images/backgrounds/soccer.jpg);
+    background: linear-gradient(180deg, transparent, #e7c84c), url(../images/backgrounds/soccer.jpg);
+    background-repeat: no-repeat;
+    background-position: top;
+    background-size: cover;
+    height: 100vh;
+    max-height: 40vh
+}
+
+#selection .headline {
+    color: #fff;
+    padding-bottom: 2rem
+}
+
+#selection .search-option {
+    
+}
+
+#selection .search-option .option-card {
+    background: hsla(0, 0%, 100%, .2);
+    box-shadow: 5px 5px 3px rgba(243, 211, 80, .5);
+    border-radius: 20px;
+    margin-bottom: 3rem;
+    -webkit-transition: all .2s ease-in;
+    transition: all .2s ease-in;
+    -webkit-transform: scale(.9);
+    transform: scale(.9);
+    opacity: .8/*.card-text*/
+}
+
+#selection .search-option .option-card .card-info {
+    background: rgba(255, 177, 47, .9);
+    padding: 3% 7%
+}
+
+#selection .search-option .option-card .card-info .card-name {
+    font-size: 2rem;
+    line-height: 110%;
+    color: #d14348
+}
+
+#people .search-option .option-card .card-info .card-title {
+    color: hsla(0, 0%, 100%, .6);
+    font-size: 1.4rem;
+    line-height: 100%
+}
+
+
+/*.card-info*/
+
+#people .search-option .option-card .card-text {
+    font-size: 1.6rem;
+    font-weight: 300;
+    line-height: 130%;
+    margin: 0;
+    padding: 7%
+}
+
+#people .search-option .option-card .card-text em {
+    color: #f2a82d;
+    font-size: 2.2rem
+}
+
+#people .search-option .poption-card:hover {
+    -webkit-transform: scale(1.05);
+    transform: scale(1.05);
+    opacity: 1
+}
