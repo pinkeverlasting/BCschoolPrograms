@@ -1,7 +1,7 @@
 
 <!-- Set Page Title if not already set -->
 <?php
-  if(!isset($page_title)) { $page_title = 'Main'; 
+  if(!isset($page_title)) { $page_title = 'Main';
 }
 
 ?>
@@ -12,9 +12,9 @@
 <html lang="en">
   <head>
     <!-- Change Page Name depending what page -->
-    <title>Assignment 4: Christy Chan - <?php echo $page_title; ?></title> 
+    <title>BC School Programs - <?php echo $page_title; ?></title>
     <meta charset="utf-8">
-    <link rel="stylesheet" media="all" href="main.css"> 
+    <link rel="stylesheet" media="all" href="main.css">
 
   </head>
 
@@ -26,9 +26,9 @@
       <navigation>
 
       <!-- Load currect user if session exists -->
-          User: <?php echo $_SESSION['email'] ?? ''; ?>
+          User: <?php echo $_SESSION['username'] ?? ''; ?>
            ||
-          <a href="showmodels.php">Home</a>   
+          <a href="showmodels.php">Home</a>
           ||
            <a href="addtowatchlist.php">List of Programs</a>
             ||
@@ -36,7 +36,7 @@
 
           <?php
             //If these sessions exist then it means user is logged in so show log out
-            if (!empty($_SESSION['logged_in']) && !empty($_SESSION['email']))
+            if (!isset($_SESSION['username'])))
             {
                echo "<a href='logout.php'>Log Out</a>";
 
@@ -45,10 +45,8 @@
             echo "<a href='login.php'>Login</a>";
           }
 
-          ?>   
-           
+          ?>
+
       </navigation>
-      
+
     </header>
-
-
