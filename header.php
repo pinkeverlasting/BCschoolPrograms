@@ -36,7 +36,7 @@
 
           <?php
             //If these sessions exist then it means user is logged in so show log out
-            if (!isset($_SESSION['username'])))
+            if (!isset($_SESSION['username']))
             {
                echo "<a href='logout.php'>Log Out</a>";
 
