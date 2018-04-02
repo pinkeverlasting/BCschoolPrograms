@@ -16,6 +16,8 @@
   //require_once('functions.php'); 
   require_once('database.php');  // include database functions & connections
   require_once('query_functions.php'); // list of query functions
+  require_once('form_functions.php'); // list of validations functions
+
 
 
   $db = db_connect();
