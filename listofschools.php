@@ -10,8 +10,15 @@
     <?php
     require('Background/initialize.php');
     require('header.php');
-
     db_connect();
+
+    $res = get_list_of_schools();
+
+    //error
+    if (!$res) {
+      die ('SQL Error: ' . mysqli_error($connection));
+    }
+   
     ?>
 <h2> School List </h2>
 
@@ -22,9 +29,9 @@
       </tr>
     <?php
     //query string to get product's name and code
-    $query_str = "SELECT schoolID, name FROM schools ORDER BY districtID";
+    //$query_str = "SELECT schoolID, name FROM schools ORDER BY districtID";
     //send query to database and get the result
-    $res = $db->query($query_str);
+    //$res = $db->query($query_str);
 
     //while the fetching the result
     while ($row = $res->fetch_assoc()){ ?>
