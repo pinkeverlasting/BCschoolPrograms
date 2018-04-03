@@ -41,7 +41,7 @@
               echo "";
             } ?>
            ||
-          <a href="showmodels.php">Home</a>
+          <a href="listofprograms.php">Home</a>
           ||
            <a href="addtowatchlist.php">List of Programs</a>
             ||

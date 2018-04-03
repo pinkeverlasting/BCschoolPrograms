@@ -11,7 +11,7 @@
     global $db;
 
     //select name and code from the table
-    $sql = "SELECT schoolID, name, districtID FROM schools";
+    $sql = "SELECT schoolID, name, districtID, city FROM schools";
     //echo $sql;
     $result = mysqli_query($db, $sql);
     confirm_result_set($result);
@@ -68,7 +68,7 @@
 	Debug purposes
     if ($result) {
 		  echo "successfully.";
-		 
+
 		} else {
    		 echo "ERROR: Could not able to execute query. " . mysqli_error($db);
 
@@ -96,5 +96,7 @@
 
   }
 
-  ?>
 
+
+
+  ?>

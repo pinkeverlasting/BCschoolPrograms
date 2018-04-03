@@ -7,7 +7,7 @@
   <body>
 
     <?php
-    require('Background/initialize.php');
+
     require('header.php');
     db_connect();
 

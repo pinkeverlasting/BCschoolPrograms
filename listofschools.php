@@ -14,13 +14,14 @@
   <body>
 
     <?php
-  
+
     require('header.php');
     db_connect();
 
 
     $dis = get_list_of_districts();
     $pro = get_list_of_programs();
+
 
 
 
@@ -71,6 +72,7 @@
          <!-- show product name  -->
          <?php
 
+         if(!isset($_SESSION['username'])){
 
           foreach($arr_dis as $key => $value){
 
@@ -89,6 +91,46 @@
 
 
           }
+        }else{
+
+          $username = trim($_SESSION['username']);
+
+          $sql = "SELECT city
+              FROM profile
+              WHERE username = ?";
+
+      $stmt = $db->prepare($sql);
+      $stmt->bind_param('s',$username);
+      $stmt->execute();
+      //get the result from database
+      $stmt->bind_result($city);
+
+      $city_pref = '';
+
+      while($stmt->fetch()){
+
+        $city_pref = $city;
+      }
+
+      echo "<h2>".$city_pref." Schools</h2>";
+      echo "<br>";
+
+          $res = get_list_of_schools();
+
+          while($row = $res->fetch_assoc()){
+
+            if($row["city"] == $city_pref){
+
+              echo $row["name"];
+              echo "<br>";
+            }
+          }
+
+          $stmt->free_result();
+
+
+        }
+
 
 
 
