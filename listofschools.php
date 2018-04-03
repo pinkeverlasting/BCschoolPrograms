@@ -4,6 +4,13 @@
   <head>
     <meta charset="utf-8">
     <title></title>
+    <script
+  src="http://code.jquery.com/jquery-1.12.4.js"
+  integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU="
+  crossorigin="anonymous"></script>
+  <script type="text/javascript" src="js/global.js"></script>
+
+  </script>
   </head>
   <body>
 
@@ -15,10 +22,7 @@
 
     $dis = get_list_of_districts();
 
-    //error
-    // if (!$res) {
-    //   die ('SQL Error: ' . mysqli_error($connection));
-    // }
+
 
     ?>
 <h2> School List </h2>
@@ -33,6 +37,10 @@
 
     //while the fetching the result
      ?>
+
+     <h3>Filter</h3>
+     School Name <input type="text" id="name">
+
 
          <!-- show product name  -->
          <?php

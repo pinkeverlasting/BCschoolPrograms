@@ -1,5 +1,12 @@
   <?php
 
+  function database_error(){
+
+    if (!$result) {
+      die ('SQL Error: ' . mysqli_error($connection));
+    }
+  }
+
   function get_list_of_schools() {
     global $db;
 
@@ -9,6 +16,9 @@
     $result = mysqli_query($db, $sql);
     confirm_result_set($result);
     return $result;
+
+    database_error();
+
   }
 
   function get_list_of_programs(){
@@ -18,6 +28,7 @@
     $result = mysqli_query($db,$sql);
     confirm_result_set($result);
     return $result;
+    database_error();
 
   }
 
@@ -28,6 +39,7 @@
     $result = mysqli_query($db,$sql);
     confirm_result_set($result);
     return $result;
+    database_error();
 
   }
 
