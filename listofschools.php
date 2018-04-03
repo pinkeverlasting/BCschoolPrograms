@@ -10,7 +10,6 @@
   crossorigin="anonymous"></script>
   <script type="text/javascript" src="js/global.js"></script>
 
-  </script>
   </head>
   <body>
 
@@ -21,6 +20,7 @@
 
 
     $dis = get_list_of_districts();
+    $pro = get_list_of_programs();
 
 
 
@@ -28,18 +28,44 @@
 <h2> School List </h2>
 
 
-    <?php
-    $arr_dis = array();
-    while($num = $dis->fetch_assoc()){
 
-      $arr_dis[$num["districtID"]] = $num["name"];
-    }
-
-    //while the fetching the result
-     ?>
 
      <h3>Filter</h3>
-     School Name <input type="text" id="name">
+     <?php
+     $arr_dis = array();
+     echo "District:";
+     echo "<select name=\"order\">";
+     while($num = $dis->fetch_assoc()){
+
+       $arr_dis[$num["districtID"]] = $num["name"];
+
+       echo "<option value=\"".$num['districtID']."\">".$num['name']."</option>";
+
+     }
+
+     echo "</select>";
+     //while the fetching the result
+      ?>
+
+      Type of School:
+      <select>
+          <option value="Elementary">Elementary School</option>
+          <option value="Secondary">Secondary School</option>
+      </select>
+
+
+      <?php
+        echo "<br>";
+        echo "Programs Included:";
+        while($gram = $pro->fetch_assoc()){
+
+          echo "<input type=\"checkbox\" name=\"".$gram["program_type"]."\">".$gram["program_type"];
+
+
+        }
+
+        ?>
+
 
 
          <!-- show product name  -->
