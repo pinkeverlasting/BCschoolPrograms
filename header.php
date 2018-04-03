@@ -26,7 +26,14 @@
       <navigation>
 
       <!-- Load currect user if session exists -->
-          User: <?php echo $_SESSION['username'] ?? ''; ?>
+          User: 
+
+
+          <?php 
+          if (isset($_SESSION['username']))
+            {
+              echo $_SESSION['username'];
+            } ?>
            ||
           <a href="showmodels.php">Home</a>
           ||
