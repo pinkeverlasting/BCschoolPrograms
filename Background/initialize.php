@@ -2,6 +2,9 @@
   ob_start(); // output buffering is turned on
 
   session_start(); // turn on sessions
+  ////session_unset(); 
+  //session_destroy();
+ // session_start();
 
   // Assign the root URL to a PHP constant
   // * Do not need to include the domain
@@ -15,10 +18,9 @@
 
   //require_once('functions.php'); 
   require_once('database.php');  // include database functions & connections
+  require_once('basic_functions.php'); // list of simple helpful functions
   require_once('query_functions.php'); // list of query functions
   require_once('form_functions.php'); // list of validations functions
-
-
 
   $db = db_connect();
   $errors = [];
