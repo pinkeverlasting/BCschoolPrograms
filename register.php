@@ -48,7 +48,7 @@
           $_SESSION['username'] = $user['username'];
 
           //redirect user
-          //sheader('Location: addtowatchlist.php');
+          header('Location: index.php');
 
         } else {
           //show the sql error

@@ -1,6 +1,7 @@
 
 <!-- Set Page Title if not already set -->
 <?php
+ session_start();
   if(!isset($page_title)) { $page_title = 'Main';
 }
 
@@ -35,15 +36,18 @@
 
           if (isset($_SESSION['username']))
             {
-              echo "User:";
+              echo "User: ";
               echo $_SESSION['username'];
             }else{
               echo "";
+            
             } ?>
            ||
-          <a href="listofprograms.php">Home</a>
+          <a href="index.php">Home</a>
           ||
-           <a href="addtowatchlist.php">List of Programs</a>
+           <a href="listofprograms.php">List of Programs</a>
+            ||
+            <a href="listofschools.php">List of Schools</a>
             ||
 
 

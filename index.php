@@ -26,7 +26,7 @@ $password = '';
   <h2 class="headline">Search by:</h2>
     <div class="search-option">
       
-<a href="http://somelink.com">
+<a href="listofprograms.php">
       <div class="option-card">
         <img src="images/Programs.jpg" alt="Programs Photo">
         <div class="card-info">
@@ -35,7 +35,7 @@ $password = '';
         </div>
       </div></a>
 
-<a href="http://food.com">
+<a href="listofschools.php">
       <div class="option-card">
         <img src="images/district.jpg" alt="district Photo">
         <div class="card-info">

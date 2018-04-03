@@ -56,6 +56,19 @@
     return $result;
   }
 
+
+  function get_list_of_programs_by_school($id){
+    global $db;
+   
+    $sql = "SELECT program_type FROM programs_in_schools WHERE schoolID = '$id'";
+    //send query to database and get the result
+    $result = mysqli_query($db,$sql);
+    confirm_result_set($result);
+    return $result;
+    database_error();
+
+  }
+
     function get_district_id($cityInput) {
     global $db;
 
@@ -96,6 +109,17 @@
 
   }
 
+  function get_school_details($id) {
+  	global $db;
+
+    //select name and code from the table
+    $sql = "SELECT * FROM schools WHERE schoolID = $id";
+
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result);
+    return $result;
+
+  }
 
 
 

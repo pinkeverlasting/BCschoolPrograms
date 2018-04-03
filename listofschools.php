@@ -18,10 +18,9 @@
     require('header.php');
     db_connect();
 
-
     $dis = get_list_of_districts();
     $pro = get_list_of_programs();
-
+/*SELECT DISTINCT programs_in_schools.schoolID, programs_in_schools.program_type, schools.districtID FROM programs_in_schools INNER JOIN schools ON programs_in_schools.schoolID = schools.schoolID WHERE programs_in_schools.program_type = 'ELL' AND schools.districtID = 5*/
 
 
 
@@ -84,7 +83,8 @@
 
               if($key == $row["districtID"]){
 
-                echo $row["name"];
+                echo '<a href="school_details.php?id=' . $row["schoolID"] . '">'.$row["name"].'</a>';
+                //echo $row["name"];
                 echo "<br>";
               }
             }

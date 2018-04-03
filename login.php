@@ -1,13 +1,14 @@
 
 <?php
 //If secure connection is not on
-if($_SERVER["HTTPS"] != "on"){
+/*if($_SERVER["HTTPS"] != "on"){
 //Turn on secure connection and direct to the url
   header("Location: https://".$_SERVER["HTTP_HOST"].$_SERVER["REQUEST_URI"]);
 
-   exit();
+   exit(); }*/
 
-}?>
+?>
+
 <!DOCTYPE html>
 <html>
   <head>
