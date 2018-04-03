@@ -14,7 +14,7 @@
     // there can be multiple errors so errors is an array
     $errors = [];
 
-    //preload queries 
+    //preload queries
 
      $res = get_list_of_cities();
 
@@ -36,20 +36,19 @@
         $user['password'] = $_POST['password'] ?? '';
         $user['confirm_password'] = $_POST['confirm_password'] ?? '';
 
-        //run user validations and make the query 
-        $result = add_user($user);  
+        //run user validations and make the query
+        $result = add_user($user);
 
-          
-        //if result is true which means validated, then insert it 
-        if($result === true) {
+
+        //if result is true which means validated, then insert it
+        if($result) {
           $new_id = mysqli_insert_id($db); //insert it into the db
 
           //create sessions
-          $_SESSION['username'] = $user['username']; 
-          $_SESSION['logged_in'] = true;
+          $_SESSION['username'] = $user['username'];
 
           //redirect user
-          header('Location: addtowatchlist.php');
+          //sheader('Location: addtowatchlist.php');
 
         } else {
           //show the sql error
@@ -68,16 +67,16 @@
         $user['confirm_password'] = '';
       }
 
-   
+
     ?>
 
     <h1>Create user</h1>
 
      <!-- display any errors -->
-   <?php echo display_errors($errors); ?> 
+   <?php echo display_errors($errors); ?>
 
     <form action="register.php" method="post">
-      
+
       <!-- name text field -->
         Username:
         <input type="text" name="username" value="<?php echo htmlspecial($user['username']); ?>" /><br />
@@ -85,16 +84,16 @@
         <input type="text" name="first_name" value="<?php echo htmlspecial($user['first_name']); ?>" /><br />
         Last Name:
         <input type="text" name="last_name" value="<?php echo htmlspecial($user['last_name']); ?>" /><br />
-       
-      <!-- Email text field --> 
+
+      <!-- Email text field -->
         Email:
         <input type="text" name="email" value="<?php echo htmlspecial($user['email']); ?>" /><br />
 
-        <!-- City text field --> 
+        <!-- City text field -->
         City:
         <select name="city">
         <option value=""> -- select city -- </option>
-        <?php 
+        <?php
 
         //populating the dropbox with city names
             while($row = $res -> fetch_assoc()){
@@ -102,21 +101,21 @@
               $id = $row['city'];
               echo '<option value="'.$id.'">' . $row["city"] . '</option>';
             }
-          ?> 
+          ?>
 
           </select>
-      
+
       <!-- warning for password message-->
          <p>
         Passwords should be at least 5 characters and include at least one uppercase letter, lowercase letter, number, and symbol.
         </p><br />
-        
+
       <!-- password text field -->
         Password:
         <input type="password" name="password" value="" /><br />
         Confrim Password:
         <input type="password" name="confirm_password" value="" /><br />
-    
+
       <br />
 
     <!-- Submit Button -->

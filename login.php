@@ -18,26 +18,12 @@ if($_SERVER["HTTPS"] != "on"){
 
       <?php
       //show header of the page
-      require('Background/initialize.php');
+
       require('header.php');
 
       db_connect();
       confirm_db_connect();
 
-
-      //Connect Database
-    //   $dbhost = "localhost";
-    //   $dbuser = "root";
-    //   $dbpass = "";
-    //   $dbname = "BCschoolprograms";
-    //   @$db = new mysqli($dbhost,$dbuser,$dbpass,$dbname);
-    //
-    //   //If there is an error in database
-    //   if (mysqli_connect_errno()) {
-    //   //show error message
-    //     echo "Database connection error: ". mysqli_connect_errno();
-    //   exit();
-    // }
 
       ?>
 
@@ -84,6 +70,8 @@ if($_SERVER["HTTPS"] != "on"){
           if(password_verify($password, $user['hashed_password'])){
             //Log in user by setting user's email to session
               $_SESSION['username'] = $username;
+              echo("log in successfully");
+              header("Location: listofprograms.php");
               //If watch list session stored values
               //which users access to model's detail and add watchlist before
               //if(isset($_SESSION['id'])){

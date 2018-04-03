@@ -4,6 +4,7 @@
   if(!isset($page_title)) { $page_title = 'Main';
 }
 
+
 ?>
 
 <!-- Start HTML -->
@@ -26,13 +27,18 @@
       <navigation>
 
       <!-- Load currect user if session exists -->
-          User: 
 
 
-          <?php 
+
+          <?php
+          require('Background/initialize.php');
+
           if (isset($_SESSION['username']))
             {
+              echo "User:";
               echo $_SESSION['username'];
+            }else{
+              echo "";
             } ?>
            ||
           <a href="showmodels.php">Home</a>
@@ -43,7 +49,7 @@
 
           <?php
             //If these sessions exist then it means user is logged in so show log out
-            if (!isset($_SESSION['username']))
+            if (isset($_SESSION['username']))
             {
                echo "<a href='logout.php'>Log Out</a>";
 
