@@ -4,6 +4,13 @@
   <head>
     <meta charset="utf-8">
     <title></title>
+    <script
+  src="http://code.jquery.com/jquery-1.12.4.js"
+  integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU="
+  crossorigin="anonymous"></script>
+  <script type="text/javascript" src="js/global.js"></script>
+
+  </script>
   </head>
   <body>
 
@@ -12,40 +19,65 @@
     require('header.php');
     db_connect();
 
-    $res = get_list_of_schools();
 
-    //error
-    if (!$res) {
-      die ('SQL Error: ' . mysqli_error($connection));
-    }
-   
+    $dis = get_list_of_districts();
+
+
+
     ?>
 <h2> School List </h2>
 
-    <table class="list">
-      <tr>
-        <th>School Name</th>
-        <th>&nbsp;</th>
-      </tr>
+
     <?php
-    //query string to get product's name and code
-    //$query_str = "SELECT schoolID, name FROM schools ORDER BY districtID";
-    //send query to database and get the result
-    //$res = $db->query($query_str);
+    $arr_dis = array();
+    while($num = $dis->fetch_assoc()){
+
+      $arr_dis[$num["districtID"]] = $num["name"];
+    }
 
     //while the fetching the result
-    while ($row = $res->fetch_assoc()){ ?>
-       <tr>
-         <!-- show product name  -->
-         <td><?php echo $row["name"]; ?></td>
-         <!-- put product code into url and in order to help get the specified product information in other page -->
-         <td><a href="schoolsdetail.php?id=<?php echo $row["schoolID"]; ?>">View</a></td>
-       </tr>
+     ?>
 
-   <?php };
+     <h3>Filter</h3>
+     School Name <input type="text" id="name">
+
+
+         <!-- show product name  -->
+         <?php
+
+
+          foreach($arr_dis as $key => $value){
+
+            echo "<h2>District #".$key.": ".$value."</h2>";
+
+            $res = get_list_of_schools();
+
+            while($row = $res->fetch_assoc()){
+
+              if($key == $row["districtID"]){
+
+                echo $row["name"];
+                echo "<br>";
+              }
+            }
+
+
+          }
+
+
+
+?>
+
+
+         <!-- put product code into url and in order to help get the specified product information in other page -->
+       <!-- <a href="schoolsdetail.php?id=<?php //echo $row["schoolID"]; ?>">View</a> -->
+
+
+   <?php //}
+
    db_disconnect($db);
      ?>
-  </table>
+
 
 </body>
 </html>

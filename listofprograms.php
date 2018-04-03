@@ -12,15 +12,16 @@
     require('header.php');
 
     db_connect();
+    $res = get_list_of_programs();
     ?>
 <h2> Program List </h2>
 
 
     <?php
     //query string to get product's name and code
-    $query_str = "SELECT program_type, program_description, image_name FROM programs_type ORDER BY program_type";
+    //$query_str = "SELECT program_type, program_description, image_name FROM programs_type ORDER BY program_type";
     //send query to database and get the result
-    $res = $db->query($query_str);
+    //$res = $db->query($query_str);
 
     //while the fetching the result
     while ($row = $res->fetch_assoc()){ ?>
