@@ -26,7 +26,7 @@
 
     	//let's just store all the data into vars
     	while($row = mysqli_fetch_array($result)) {
-    		$districtID = $row['districtID'];
+    	$districtID = $row['districtID'];
 			$schoolID = $row['schoolID'];
 			$name = $row['name'];
 			$address = $row['address'];
@@ -57,8 +57,8 @@
 <h1> Programs Offered: </h1>
 
 <?php
-while ($rows = $res->fetch_assoc()) {
-
+    while ($rows = $res->fetch_assoc()) {
+          //echo $rows['program_type'];
          echo '<a href="programsdetail.php?id=' .$rows["program_type"]. '">' .$rows["program_type"]. '</a>';
          echo '<br>';
 		} ?>

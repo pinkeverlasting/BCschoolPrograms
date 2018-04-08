@@ -120,9 +120,11 @@
           while($row = $res->fetch_assoc()){
 
             if($row["city"] == $city_pref){
-
-              echo $row["name"];
-              echo "<br>";
+                echo '<a href="school_details.php?id=' . $row["schoolID"] . '">'.$row["name"].'</a>';
+                //echo $row["name"];
+                echo "<br>";
+              //echo $row["name"];
+              //echo "<br>";
             }
           }
 
