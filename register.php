@@ -78,19 +78,19 @@
     <form action="register.php" method="post">
 
       <!-- name text field -->
-        Username:
+        <h3>Username:</h3>
         <input type="text" name="username" value="<?php echo htmlspecial($user['username']); ?>" /><br />
-        First Name:
+        <h3>First Name:</h3>
         <input type="text" name="first_name" value="<?php echo htmlspecial($user['first_name']); ?>" /><br />
-        Last Name:
+        <h3>Last Name:</h3>
         <input type="text" name="last_name" value="<?php echo htmlspecial($user['last_name']); ?>" /><br />
 
       <!-- Email text field -->
-        Email:
+        <h3>Email:</h3>
         <input type="text" name="email" value="<?php echo htmlspecial($user['email']); ?>" /><br />
 
         <!-- City text field -->
-        City:
+        <h3>City:</h3>
         <select name="city">
         <option value=""> -- select city -- </option>
         <?php
@@ -104,22 +104,23 @@
           ?>
 
           </select>
+          <br/><br/>
 
       <!-- warning for password message-->
          <p>
         Passwords should be at least 5 characters and include at least one uppercase letter, lowercase letter, number, and symbol.
-        </p><br />
+        </p><br/>
 
       <!-- password text field -->
-        Password:
+        <h3>Password:</h3>
         <input type="password" name="password" value="" /><br />
-        Confrim Password:
+        <h3>Confrim Password:</h3>
         <input type="password" name="confirm_password" value="" /><br />
 
       <br />
 
     <!-- Submit Button -->
-        <input type="submit" value="Create user" />
+        <input class="button" type="submit" value="Create user" />
 
     </form>
 

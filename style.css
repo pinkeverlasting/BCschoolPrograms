@@ -108,7 +108,7 @@ a:hover{
 
 a.registerLink:hover, a.registerLink {
   text-decoration: underline;
-  padding-top: 5em;
+  margin-top: 5em;
 }
 
 #nav{
@@ -195,7 +195,6 @@ h2{
 .button:hover {opacity: 1}
 
 form {
-  margin: auto;
-  width: 50%;
+  margin: 1em 2.5em;
 
 }
