@@ -16,8 +16,8 @@
   db_connect();
 
   //Get the product code and product name stored in the url
-    $code = $_GET['id'] ?? '';
-    $type = $_GET['type'] ?? '';
+    if(isset($_GET['id'])) { $code = $_GET['id']; }else{ $code = '';}
+    if(isset($_GET['type'])) {$type = $_GET['type'];}else{$type = '';}
   //if user is logged in, get user's email
     if(isset($_SESSION['username'])) $username = $_SESSION['username'];
       //if email session is set
@@ -33,19 +33,23 @@
         //get the result from database
         $stmt->bind_result($id,$name,$programtype,$auto);
         //create an array to check if there is any duplicate product code
-        $arr = array();
+        $school_arr = array();
+        $programs_arr = array();
 
         while($stmt->fetch()){
           //put all user's exist product code in an array
-          $arr["id"] = $id;
-          $arr["program_type"] = $programtype;
-
+          if(!empty($id)){
+          array_push($school_arr,$id);
+        }
+        if(!empty($programtype)){
+          array_push($programs_arr,$programtype);
+        }
 
         }
         //if users access watch list through models detail
         if($code !== '' || $type !== ''){
         //if the products is not in watch list
-        if(!in_array($code,$arr) && !in_array($type,$arr)){
+        if(!in_array($code,$school_arr) && !in_array($type,$programs_arr)){
         //SQL query insert product code and name into wish list table
         $query_str = "INSERT INTO bookmark_list ";
         $query_str.= "(schoolID,username,program_type) ";
@@ -94,9 +98,9 @@
 
       }
 
-      if(!empty($type)){
+      if(!empty($program_type)){
 
-        array_push($program,$type);
+        array_push($program,$program_type);
       }
 
 
