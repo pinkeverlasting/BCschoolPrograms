@@ -177,6 +177,72 @@ h2{
   width:50%;
 }
 
+#filter{
+
+  font-size: 1.1em;
+  letter-spacing: 0.07em;
+  margin: 1em 3.5em;
+}
+
+#filter-section{
+
+  margin: 1em 4.7em;
+  font-size:0.8em;
+  letter-spacing: 0.07em;
+}
+
+#filter-title{
+
+  margin-right: 1em;
+
+}
+
+#drop-list{
+
+  margin: 1em 0em;
+}
+
+#checkbox{
+
+  margin-right: 1em;
+
+}
+
+
+
+#check-text{
+
+  margin-right: 1em;
+  font-size: 0.9em;
+}
+
+#school-title{
+
+  font-size: 1.4em;
+  margin-top: 1em;
+}
+
+#school-link{
+
+  margin: 1em 0em;
+}
+
+#district-title {
+
+  font-size: 1.4em;
+  margin: 1.5em 0em;
+}
+
+#school-list ul{
+
+margin-left: -1.8em;
+}
+
+#school-list li{
+
+  margin: 1em 0em;
+}
+
 .button {
   background-color: #AAA;
   border: none;

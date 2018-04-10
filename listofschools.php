@@ -21,16 +21,20 @@
 
 
     ?>
+
+    <img src="images/schoolbanner.png" id="header-img" alt="school"/>
 <h2> School List </h2>
 
 
 
 
-     <h3>Filter</h3>
+     <h3 id="filter">Filter</h3>
+
+     <div id="filter-section">
      <?php
      $arr_dis = array();
-     echo "<span>District:</span>";
-     echo "<select name=\"order\">";
+     echo "<span id=\"filter-title\">District:</span>";
+     echo "<select id=\"drop-list\" name=\"order\">";
      while($num = $dis->fetch_assoc()){
 
        $arr_dis[$num["districtID"]] = $num["name"];
@@ -43,8 +47,8 @@
      //while the fetching the result
       ?>
 
-      Type of School:
-      <select>
+      <span id="filter-title">Type of School:</span>
+      <select id="drop-list">
           <option value="Elementary">Elementary School</option>
           <option value="Secondary">Secondary School</option>
       </select>
@@ -53,22 +57,27 @@
 
         <?php
           echo "<br>";
-          echo "Programs Included:";
+          echo "<span id=\"filter-title\">Programs Included:</span>";
+          echo "<br>";
+          echo "<div id=\"checkbox-area\">";
           while($gram = $pro->fetch_assoc()){
 
-            echo "<input type=\"checkbox\" id=\"checkbox\" value=\"".$gram["program_type"]."\">".$gram["program_type"];
+            echo "<input type=\"checkbox\" id=\"checkbox\" value=\"".$gram["program_type"]."\"><span id=\"check-text\">".$gram["program_type"]."</span>";
 
 
           }
 
+          echo"</div>";
+
+          echo"<div id=\"school-list\">";
 
           if(!isset($_SESSION['username'])){
 
             foreach($arr_dis as $key => $value){
 
-              echo "<h2>District #".$key.": ".$value."</h2>";
+              echo "<h3 id=\"district-title\">District #".$key.": ".$value."</h3>";
 
-
+              echo "<ul>";
 
               $res = get_list_of_schools();
 
@@ -76,15 +85,21 @@
 
                 if($key == $row["districtID"]){
 
-                  echo '<a href="school_details.php?id=' . $row["schoolID"] . '">'.$row["name"].'</a>';
+                  echo "<li>";
+                  echo '<a href="school_details.php?id=' . $row["schoolID"] . '" id="school-link">'.$row["name"].'</a>';
                   //echo $row["name"];
                   echo "<br>";
+                  echo "</li>";
 
                   $schoolInfo[] = $row;
                 }
 
             }
+
+            echo "</ul>";
           }
+
+          echo"</div>";
 
       } else{
 
@@ -107,7 +122,7 @@
         $city_pref = $city;
         }
 
-        echo "<h2>".$city_pref." Schools</h2>";
+        echo "<h3 id=\"school-title\">".$city_pref." Schools</h3>";
         echo "<br>";
 
           $res = get_list_of_schools();
