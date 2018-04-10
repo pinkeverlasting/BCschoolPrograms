@@ -1,0 +1,91 @@
+<?php
+
+if(!isset($_SESSION['username'])){
+
+ foreach($arr_dis as $key => $value){
+
+   echo "<h2>District #".$key.": ".$value."</h2>";
+
+   $res = get_list_of_schools();
+
+   while($row = $res->fetch_assoc()){
+
+     if($key == $row["districtID"]){
+
+       echo '<a href="school_details.php?id=' . $row["schoolID"] . '">'.$row["name"].'</a>';
+       //echo $row["name"];
+       echo "<br>";
+     }
+   }
+
+
+ }
+}else{
+
+ $username = trim($_SESSION['username']);
+
+ $sql = "SELECT city
+     FROM profile
+     WHERE username = ?";
+
+$stmt = $db->prepare($sql);
+$stmt->bind_param('s',$username);
+$stmt->execute();
+//get the result from database
+$stmt->bind_result($city);
+
+$city_pref = '';
+
+while($stmt->fetch()){
+
+$city_pref = $city;
+}
+
+echo "<h2>".$city_pref." Schools</h2>";
+echo "<br>";
+
+ $res = get_list_of_schools();
+
+ while($row = $res->fetch_assoc()){
+
+   if($row["city"] == $city_pref){
+
+     echo $row["name"];
+     echo "<br>";
+   }
+ }
+
+ $stmt->free_result();
+
+
+}
+
+
+
+
+?>
+
+
+<!-- put product code into url and in order to help get the specified product information in other page -->
+<!-- <a href="schoolsdetail.php?id= //echo $row["schoolID"]; ?>">View</a> -->
+
+
+<?php //}
+
+db_disconnect($db);
+?>
+
+
+$.getJSON('filter.php',function(result){
+  console.log(result);
+  if(!result.success){
+    console.log("Error polling server for data!");
+    return;
+  }
+
+  $.each(result,function(success,name,code,year){
+    $('<a></a>').attr("href","school_details.php?id=" + code)
+                .append(name);
+
+
+  });

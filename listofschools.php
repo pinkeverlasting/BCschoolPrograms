@@ -29,7 +29,7 @@
      <h3>Filter</h3>
      <?php
      $arr_dis = array();
-     echo "District:";
+     echo "<span>District:</span>";
      echo "<select name=\"order\">";
      while($num = $dis->fetch_assoc()){
 

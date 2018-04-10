@@ -1,4 +1,9 @@
+*{
 
+  font-family: 'Lato', serif;
+  margin:0em;
+
+}
 
 
 #selection {
@@ -17,40 +22,47 @@
 
 #selection .headline {
     color: #fff;
-    padding-bottom: 2rem
+
 }
 
 #selection .search-option {
-    
+
+  display: flex;
+  justify-content: space-between;
+
 }
 
 #selection .search-option .option-card {
     background: hsla(0, 0%, 100%, .2);
     box-shadow: 5px 5px 3px rgba(243, 211, 80, .5);
     border-radius: 20px;
-    margin-bottom: 3rem;
+    margin-bottom: 5rem;
+    margin: 0em 2em;
     -webkit-transition: all .2s ease-in;
     transition: all .2s ease-in;
     -webkit-transform: scale(.9);
     transform: scale(.9);
-    opacity: .8/*.card-text*/
+    opacity: .8;/*.card-text*/
+    flex: 1;
+    letter-spacing: 0.07em;
 }
 
 #selection .search-option .option-card .card-info {
     background: rgba(255, 177, 47, .9);
-    padding: 3% 7%
+    padding: 3% 7%;
 }
 
 #selection .search-option .option-card .card-info .card-name {
-    font-size: 2rem;
+    font-size: 1.2em;
     line-height: 110%;
     color: #d14348
 }
 
 #people .search-option .option-card .card-info .card-title {
     color: hsla(0, 0%, 100%, .6);
-    font-size: 1.4rem;
-    line-height: 100%
+    font-size: 0.8em;
+    line-height: 100%;
+    letter-spacing: 0.07em;
 }
 
 
@@ -73,4 +85,82 @@
     -webkit-transform: scale(1.05);
     transform: scale(1.05);
     opacity: 1
+}
+
+ h1{
+
+  margin: 1em 2em;
+  font-size: 1.2em;
+  letter-spacing: 0.07em;
+
+
+}
+
+a{
+
+  text-decoration: none;
+  color: #000;
+}
+
+a:hover{
+
+  color: #AAA;
+}
+
+#nav{
+
+  margin: 1em 2em;
+  font-size: 0.8em;
+  letter-spacing: 0.05em;
+}
+
+.header-flex{
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+h2{
+
+  margin: 2em 3em;
+  font-size: 1.2em;
+  letter-spacing: 0.07em;
+
+}
+
+#header-img{
+
+  width:100%;
+  height:auto;
+  margin: 2em 0em 0em 0em;
+
+
+}
+
+#index-img{
+
+  width:100%;
+  height:auto;
+}
+
+#program-card{
+
+  margin: 3em;
+
+}
+
+#program-card h3{
+
+  font-size: 1.1em;
+  letter-spacing: 0.07em;
+  margin: 1em 0em;
+
+}
+
+#program-card p{
+
+  font-size: 0.8em;
+  letter-spacing: 0.07em;
+  width:50%;
 }

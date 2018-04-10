@@ -1,4 +1,4 @@
-<?php require_once('Background/initialize.php'); 
+<?php require_once('Background/initialize.php');
 
 // there can be multiple errors so errors is an array
 $errors = [];
@@ -18,26 +18,28 @@ $password = '';
 <?php include('header.php'); ?>
 
 <div id="content">
-  <h1>Discover New Programs</h1>
+  <img src="images/header.jpg" id="header-img" alt="BC classrooms"/>
+
+  <h2>Discover New Programs</h2>
+  <h2>Search By</h2>
 
 <!-- display any errors -->
   <!--<?php //echo display_errors($errors); ?>-->
 <section id="selection" class="section">
-  <h2 class="headline">Search by:</h2>
     <div class="search-option">
-      
+
 <a href="listofprograms.php">
       <div class="option-card">
-        <img src="images/Programs.jpg" alt="Programs Photo">
+        <img src="images/Programs.png" alt="Programs Photo" id="index-img">
         <div class="card-info">
           <h3 class="card-name">List of Youth Program</h3>
-          <h4 class="card-title">Discover all the types of youth programs provided in BC.</h4>
+          <h4 class="card-title">Discover youth programs provided in BC.</h4>
         </div>
       </div></a>
 
 <a href="listofschools.php">
       <div class="option-card">
-        <img src="images/district.jpg" alt="district Photo">
+        <img src="images/districts.png" alt="district Photo" id="index-img">
         <div class="card-info">
           <h3 class="card-name">By School District</h3>
           <h4 class="card-title">Find programs by School District</h4>
@@ -46,5 +48,5 @@ $password = '';
       </div>
       </section>
 
- 
+
 </div>

@@ -8,7 +8,7 @@
   <body>
 
     <?php
-  
+
     require('header.php');
 
     db_connect();
@@ -27,12 +27,14 @@
     while ($row = $res->fetch_assoc()){ ?>
 
          <!-- show product name  -->
-         <a href="program_details.php?id=<?php echo $row["program_type"]; ?>"><?php echo $row["program_type"]; ?></a>
+         <div id="program-card">
+         <img src="images/<?php echo $row["image_name"];?>" width="500px"/>
+         <h3><a href="program_details.php?id=<?php echo $row["program_type"]; ?>"><?php echo $row["program_type"]; ?></a></h3>
          <!-- put product code into url and in order to help get the specified product information in other page -->
          <br>
-        <img src="images/<?php echo $row["image_name"];?>" width="500px"/>
-         <p><?php echo $row["program_description"];?></p>
 
+         <p><?php echo $row["program_description"];?></p>
+       </div>
 
    <?php };
    db_disconnect($db);
