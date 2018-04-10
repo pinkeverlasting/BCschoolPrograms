@@ -40,31 +40,38 @@
 
     ?>
 
-
-<div id="content">
 <h1> <?php echo $name?></h1>
-<h4> <?php echo 'Address: ' .$address ?></h4>
-<h4> <?php echo 'City: ' .$city ?></h4>
-<h4> <?php echo 'Postal: ' .$postal ?></h4>
-<h4> <?php echo 'Phone: ' .$phone ?></h4>
-<h4> <?php echo 'Email: ' .$email ?></h4>
-<br/><br/>
-<h3> <?php echo 'Principal: ' .$principal ?></h3>
-<h3> <?php echo 'Grades Offered: ' .$grade ?></h3>
-<h3> <?php echo 'School Id: ' .$schoolID ?></h3>
-<h3> <?php echo 'District Number: ' .$districtID ?></h3>
+<div id="content">
 
-<h1> Programs Offered: </h1>
+<p> <?php echo 'Address: ' .$address ?></p>
+<p> <?php echo 'City: ' .$city ?></p>
+<p> <?php echo 'Postal: ' .$postal ?></p>
+<p> <?php echo 'Phone: ' .$phone ?></p>
+<p> <?php echo 'Email: ' .$email ?></p>
+<br/><br/>
+<p> <?php echo 'Principal: ' .$principal ?></p>
+<p> <?php echo 'Grades Offered: ' .$grade ?></p>
+<p> <?php echo 'School Id: ' .$schoolID ?></p>
+<p> <?php echo 'District Number: ' .$districtID ?></p>
+
+<h3 id="school-title"> Programs Offered: </h3>
 
 <?php
+  echo "<div id=\"school-list\">";
+  echo "<ul>";
     while ($rows = $res->fetch_assoc()) {
           //echo $rows['program_type'];
+        echo "<li>";
          echo '<a href="program_details.php?id=' .$rows["program_type"]. '">' .$rows["program_type"]. '</a>';
          echo '<br>';
-		} ?>
+         echo "</li>";
+		}
+  echo "</ul>";
+  echo "</div>";
+    ?>
 
-<a href="listofschools.php">Back to Model List</a>
-<a href="addtowatchlist.php?id=<?php echo $schoolID;?>"> Add to Watch List</a>
+<a href="listofschools.php" class="button">Back to Model List</a>
+<a href="addtowatchlist.php?id=<?php echo $schoolID;?>" class="button" > Add to Watch List</a>
 
 <?php
 db_disconnect($db) ?>

@@ -141,8 +141,8 @@
 
 ?>
 
-<a href="listofprograms.php">Back to Model List</a>
-<a href="addtowatchlist.php?type=<?php echo $name;?>"> Add to Watch List</a>
+<a href="listofprograms.php" class="button">Back to Model List</a>
+<a href="addtowatchlist.php?type=<?php echo $name;?>" class="button"> Add to Watch List</a>
 
 
 </div>
