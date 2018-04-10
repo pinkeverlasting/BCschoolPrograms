@@ -70,3 +70,7 @@
 db_disconnect($db) ?>
 
 </div>
+
+ <div id="display" class="myCustom1">
+       <?php require('display_comment.php'); ?>
+ </div>

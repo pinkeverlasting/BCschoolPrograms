@@ -135,6 +135,8 @@
 
     } else if (isset($_POST['districtSelect']) && !$_POST['districtSelect'] == "") {
       echo load_district($district,$city,$r);
+    } else {
+      echo '<h4> No Offerings Found </h4>';
     }
 
 ?>

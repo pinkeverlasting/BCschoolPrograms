@@ -86,7 +86,7 @@
             }
           }
 
-      }else{
+      } else{
 
           $username = trim($_SESSION['username']);
 
@@ -116,17 +116,18 @@
 
             if($row["city"] == $city_pref){
 
-              echo '<a href="school_details.php?id=' . $row["schoolID"] . '">'.$row["name"].'</a>';
-              echo "<br>";
+              //echo $row["name"];
+              //echo "<br>";
+
+               echo '<a href="school_details.php?id=' . $row["schoolID"] . '">'.$row["name"].'</a>';
+                  //echo $row["name"];
+                  echo "<br>";
             }
           }
 
           $stmt->free_result();
 
-
         }
-
-
           ?>
 
 
