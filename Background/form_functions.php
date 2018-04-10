@@ -172,7 +172,7 @@ $randomid = (rand(10000,20000));
     $sql = "UPDATE profile SET first_name = '$fname', last_name = '$lname', email = '$email', districtID = '$schoolid', city = '$city' WHERE username = '$username'";
     $result = mysqli_query($db, $sql) or die('SQL Error: ' . mysqli_error($db));
     if(mysqli_query($db, $sql)) {
-        echo "Records were updated successfully.";
+        echo "<h3><form> Records were updated successfully. </form></h3>";
     } else {
         echo "ERROR: Could not able to execute $sql. " . mysqli_error($db);
     }

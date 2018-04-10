@@ -91,16 +91,16 @@
 
     <form action="profile.php" method="post">
 
-    First Name:
+    <h3>First Name:</h3>
     <input id="first_name" name="first_name" type="text" value="<?php echo $fname?>" disabled></br>
-    Last Name:
+    <h3>Last Name:</h3>
     <input id="last_name" name="last_name" type="text" value="<?php echo $lname?>" disabled></br>
-    Email:
+    <h3>Email:</h3>
     <input id="email" name="email" type="text" value="<?php echo $email?>" disabled></br>
   
 
         <!-- City text field -->
-        City: 
+        <h3>City: </h3>
         <select name="city" id="city" disabled>
         <option value=""> -- select city -- </option>
         <?php
@@ -121,10 +121,10 @@
       <br />
 
     <!-- Submit Button -->
-        <input type="button" id='edit' value="Edit">
+        <input class="button" type="button" id='edit' value="Edit">
         
         <div id="Create" style="display:none">
-          <input type="submit" id='submit' value="Submit">
+          <input class="button" type="submit" id='submit' value="Submit">
         </div>
 
 
