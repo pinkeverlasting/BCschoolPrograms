@@ -62,6 +62,17 @@
 
   }
 
+  function get_names_of_programs($program){
+    global $db;
+    $sql = "SELECT program_type, program_description, image_name FROM programs_type WHERE program_type = '$program' ";
+    //send query to database and get the result
+    $result = mysqli_query($db,$sql);
+    confirm_result_set($result);
+    return $result;
+    database_error();
+
+  }
+
     function get_program_details($id) {
     global $db;
 
@@ -187,6 +198,18 @@
 
   }
 
+  function get_school_names($id) {
+  	global $db;
+
+    //select name and code from the table
+    $sql = "SELECT name FROM schools WHERE schoolID = $id";
+
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result);
+    return $result;
+
+  }
+
     function get_city_with_ID($id) {
     global $db;
 
@@ -213,6 +236,8 @@
     return $result;
 
   }
+
+
 
 
 

@@ -41,7 +41,7 @@
     ?>
 
 
-<div id="content">    
+<div id="content">
 <h1> <?php echo $name?></h1>
 <h4> <?php echo 'Address: ' .$address ?></h4>
 <h4> <?php echo 'City: ' .$city ?></h4>
@@ -62,5 +62,11 @@
          echo '<a href="program_details.php?id=' .$rows["program_type"]. '">' .$rows["program_type"]. '</a>';
          echo '<br>';
 		} ?>
+
+<a href="listofschools.php">Back to Model List</a>
+<a href="addtowatchlist.php?id=<?php echo $schoolID;?>"> Add to Watch List</a>
+
+<?php
+db_disconnect($db) ?>
 
 </div>

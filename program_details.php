@@ -18,6 +18,7 @@
 
     //get the id from the URLs
 	 $id = $_GET['id'];
+   $type = '';
 
   ?>
 
@@ -27,7 +28,7 @@
 
 	//get the data using the ID
 	$result = get_program_details($id);
-  
+
 
   if(isset($_SESSION['username'])){
            $username = trim($_SESSION['username']);
@@ -58,7 +59,7 @@
 
             $district = $_POST['districtSelect'];
             $getCity = get_city_with_ID($district);
-            
+
             while($rowC = mysqli_fetch_array($getCity)) {
                 $city = $rowC['city'];;
               }
@@ -66,13 +67,13 @@
             $r = get_list_of_schools_by_district($district, $id) or die ('SQL Error: ' . mysqli_error($connection));
         }
     }
-  
+
 
     function load_district($district, $city, $r) {
         echo "<h2>District #".$district." in ".$city."</h2>";
 
         while($rowD = mysqli_fetch_array($r)) {
-          echo '<a href="school_details.php?id=' .$rowD['name']. '">'.$rowD['name'].'</a>'; 
+          echo '<a href="school_details.php?id=' .$rowD['name']. '">'.$rowD['name'].'</a>';
           echo "<br>";
         }
 
@@ -93,14 +94,14 @@
     ?>
 
 
-<div id="content">    
+<div id="content">
 <h1> <?php echo $name?></h1>
-<h4> <?php echo 'Description: '?></h4> 
+<h4> <?php echo 'Description: '?></h4>
 <p> <?php echo $description ?></p>
 
-<?php 
+<?php
     $dropdown = get_list_of_districts_order_city();
-     
+
      if (!isset($_SESSION['username'])){
     echo "<h2> Select a District to see Program's Offerings: </h2>";
   }
@@ -109,7 +110,7 @@
 <select name="districtSelect" onchange="this.form.submit();">
 <option value=""> -- select city -- </option>
 
-<?php 
+<?php
  while ($ro = $dropdown->fetch_assoc()) {
           //echo $rows['program_type'];
         if ($district == $ro["districtID"]) {
@@ -126,16 +127,20 @@
 
 </br>
 
-<?php 
+<?php
     if(isset($_SESSION['username'])){
         //school name in distrct
         echo "<h1> Availability in Your Area </h1>";
         echo load_district($district,$city,$r);
-        
+
     } else if (isset($_POST['districtSelect']) && !$_POST['districtSelect'] == "") {
       echo load_district($district,$city,$r);
     }
 
 ?>
+
+<a href="listofprograms.php">Back to Model List</a>
+<a href="addtowatchlist.php?type=<?php echo $name;?>"> Add to Watch List</a>
+
 
 </div>

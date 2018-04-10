@@ -16,8 +16,8 @@
   db_connect();
 
   //Get the product code and product name stored in the url
-    $code = $_GET['id'] ?? '1';
-    $type = $_GET['program_type'] ?? '';
+    $code = $_GET['id'] ?? '';
+    $type = $_GET['type'] ?? '';
   //if user is logged in, get user's email
     if(isset($_SESSION['username'])) $username = $_SESSION['username'];
       //if email session is set
@@ -31,7 +31,7 @@
         $stmt->bind_param('s',$username);
         $stmt->execute();
         //get the result from database
-        $stmt->bind_result($id,$username,$programtype);
+        $stmt->bind_result($id,$name,$programtype,$auto);
         //create an array to check if there is any duplicate product code
         $arr = array();
 
@@ -43,7 +43,7 @@
 
         }
         //if users access watch list through models detail
-        if($code !== '1' && $type !== ''){
+        if($code !== '' || $type !== ''){
         //if the products is not in watch list
         if(!in_array($code,$arr) && !in_array($type,$arr)){
         //SQL query insert product code and name into wish list table
@@ -76,21 +76,62 @@
         }
           //create table to show user's watch list information
           echo "<table>";
-          echo "<tr><th>Product Name</th><th>&nbsp;</th></tr>";
+          echo "<tr><th>Your Favorite Schools / Programs</th><th>&nbsp;</th></tr>";
           //get user's email and send query to database
           $res = $db->prepare($sql);
           $res->bind_param('s',$username);
           $res->execute();
-          $res->bind_result($schoolID,$name,$program_type);
+          $res->bind_result($schoolID,$name,$program_type,$increment);
     //get product information and show the result
+
+    $school = array();
+    $program = array();
     while($res->fetch()){
 
+      if(!empty($schoolID)){
+
+        array_push($school,$schoolID);
+
+      }
+
+      if(!empty($type)){
+
+        array_push($program,$type);
+      }
+
+
+    }
+
+    print_r($school);
+    print_r($program);
+
+    foreach($school as $value){
+    $sch = get_school_names($value);
+
+    while($num = $sch->fetch_assoc()){
+
       echo "<tr>";
-      echo "<td>".$name."</td>";
-      echo "<td><a href=\"schooldetail.php?id=".$schoolID."\">View</a></td>";
+      echo "<td>".$num["name"]."</td>";
+      echo "<td><a href=\"school_details.php?id=".$value."\">View</a></td>";
       echo "</tr>";
 
     }
+  }
+
+  foreach($program as $value){
+  $pro = get_names_of_programs($value);
+
+  while($gram = $pro->fetch_assoc()){
+
+    echo "<tr>";
+    echo "<td>".$gram["program_type"]."</td>";
+    echo "<td><a href=\"program_details.php?id=".$gram["program_type"]."\">View</a></td>";
+    echo "</tr>";
+
+  }
+}
+
+
     echo "</table>";
 
 
