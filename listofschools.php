@@ -4,11 +4,7 @@
   <head>
     <meta charset="utf-8">
     <title></title>
-    <script
-  src="http://code.jquery.com/jquery-1.12.4.js"
-  integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU="
-  crossorigin="anonymous"></script>
-  <script type="text/javascript" src="js/global.js"></script>
+
 
   </head>
   <body>
@@ -54,44 +50,43 @@
       </select>
 
 
-      <?php
-        echo "<br>";
-        echo "Programs Included:";
-        while($gram = $pro->fetch_assoc()){
 
-          echo "<input type=\"checkbox\" name=\"".$gram["program_type"]."\">".$gram["program_type"];
+        <?php
+          echo "<br>";
+          echo "Programs Included:";
+          while($gram = $pro->fetch_assoc()){
 
-
-        }
-
-        ?>
-
-
-
-         <!-- show product name  -->
-         <?php
-
-         if(!isset($_SESSION['username'])){
-
-          foreach($arr_dis as $key => $value){
-
-            echo "<h2>District #".$key.": ".$value."</h2>";
-
-            $res = get_list_of_schools();
-
-            while($row = $res->fetch_assoc()){
-
-              if($key == $row["districtID"]){
-
-                echo '<a href="school_details.php?id=' . $row["schoolID"] . '">'.$row["name"].'</a>';
-                //echo $row["name"];
-                echo "<br>";
-              }
-            }
+            echo "<input type=\"checkbox\" id=\"checkbox\" value=\"".$gram["program_type"]."\">".$gram["program_type"];
 
 
           }
-        }else{
+
+
+          if(!isset($_SESSION['username'])){
+
+            foreach($arr_dis as $key => $value){
+
+              echo "<h2>District #".$key.": ".$value."</h2>";
+
+
+
+              $res = get_list_of_schools();
+
+              while($row = $res->fetch_assoc()){
+
+                if($key == $row["districtID"]){
+
+                  echo '<a href="school_details.php?id=' . $row["schoolID"] . '">'.$row["name"].'</a>';
+                  //echo $row["name"];
+                  echo "<br>";
+
+                  $schoolInfo[] = $row;
+                }
+
+            }
+          }
+
+      }else{
 
           $username = trim($_SESSION['username']);
 
@@ -99,32 +94,30 @@
               FROM profile
               WHERE username = ?";
 
-      $stmt = $db->prepare($sql);
-      $stmt->bind_param('s',$username);
-      $stmt->execute();
-      //get the result from database
-      $stmt->bind_result($city);
+        $stmt = $db->prepare($sql);
+        $stmt->bind_param('s',$username);
+        $stmt->execute();
+        //get the result from database
+        $stmt->bind_result($city);
 
-      $city_pref = '';
+        $city_pref = '';
 
-      while($stmt->fetch()){
+        while($stmt->fetch()){
 
         $city_pref = $city;
-      }
+        }
 
-      echo "<h2>".$city_pref." Schools</h2>";
-      echo "<br>";
+        echo "<h2>".$city_pref." Schools</h2>";
+        echo "<br>";
 
           $res = get_list_of_schools();
 
           while($row = $res->fetch_assoc()){
 
             if($row["city"] == $city_pref){
-                echo '<a href="school_details.php?id=' . $row["schoolID"] . '">'.$row["name"].'</a>';
-                //echo $row["name"];
-                echo "<br>";
-              //echo $row["name"];
-              //echo "<br>";
+
+              echo $row["name"];
+              echo "<br>";
             }
           }
 
@@ -134,20 +127,11 @@
         }
 
 
+          ?>
 
 
-?>
 
-
-         <!-- put product code into url and in order to help get the specified product information in other page -->
-       <!-- <a href="schoolsdetail.php?id=<?php //echo $row["schoolID"]; ?>">View</a> -->
-
-
-   <?php //}
-
-   db_disconnect($db);
-     ?>
-
-
+<script src="//code.jquery.com/jquery-3.1.0.min.js"></script>
+<!-- <script src="js/filter_function.js"></script> -->
 </body>
 </html>

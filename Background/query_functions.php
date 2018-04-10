@@ -112,7 +112,7 @@
 
   function get_list_of_programs_by_school($id){
     global $db;
-   
+
     //prevent duplicates
     $sql = "SELECT DISTINCT program_type FROM programs_in_schools WHERE schoolID = '$id'";
     //send query to database and get the result
@@ -125,7 +125,7 @@
 
   function get_profile($username) {
     global $db;
-   
+
     //prevent duplicates
     $sql = "SELECT first_name, last_name, email, city, districtID FROM profile WHERE username = '$username'";
     //send query to database and get the result
@@ -194,6 +194,21 @@
     $sql = "SELECT city FROM districts WHERE districtID = '$id'";
 
     $result = mysqli_query($db, $sql) or die('SQL Error: ' . mysqli_error($db));
+    confirm_result_set($result);
+    return $result;
+
+  }
+
+  function get_programs_by_school($program_type){
+    global $db;
+
+    $sql = "SELECT name, schools.schoolID, programs_in_schools.year FROM schools ";
+    $sql.= "INNER JOIN programs_in_schools ON schools.schoolID = programs_in_schools.schoolID ";
+    $sql.= "WHERE schools.schoolID IN ";
+    $sql.= "(SELECT schoolID FROM programs_in_schools ";
+    $sql.= "WHERE program_type = '$program_type')";
+
+    $result = mysqli_query($db,$sql) or die('SQL Error:'.mysqli_error($db));
     confirm_result_set($result);
     return $result;
 
