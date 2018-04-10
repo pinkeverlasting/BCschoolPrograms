@@ -52,11 +52,13 @@
 
               $r = get_list_of_schools_by_district($district, $id) or die ('SQL Error: ' . mysqli_error($connection));
 
-    } else if (is_post() && !isset($_POST['districtSelect'])) {
+    } else if (!isset($_SESSION['username'])) {
 
-      if (!$_POST['districtSelect'] == "") {
+    if (isset($_POST['districtSelect']) && !$_POST['districtSelect'] == "") {
+
             $district = $_POST['districtSelect'];
             $getCity = get_city_with_ID($district);
+            
             while($rowC = mysqli_fetch_array($getCity)) {
                 $city = $rowC['city'];;
               }
@@ -64,6 +66,7 @@
             $r = get_list_of_schools_by_district($district, $id) or die ('SQL Error: ' . mysqli_error($connection));
         }
     }
+  
 
     function load_district($district, $city, $r) {
         echo "<h2>District #".$district." in ".$city."</h2>";
@@ -97,6 +100,7 @@
 
 <?php 
     $dropdown = get_list_of_districts_order_city();
+     
      if (!isset($_SESSION['username'])){
     echo "<h2> Select a District to see Program's Offerings: </h2>";
   }
@@ -128,6 +132,8 @@
         echo "<h1> Availability in Your Area </h1>";
         echo load_district($district,$city,$r);
         
+    } else if (isset($_POST['districtSelect']) && !$_POST['districtSelect'] == "") {
+      echo load_district($district,$city,$r);
     }
 
 ?>
