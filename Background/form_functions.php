@@ -8,7 +8,34 @@
     return preg_match($email_regex, $value) === 1;
   }
 
-     function validate_registration($user) {
+  function validate_profile($user) {
+
+    $errors = [];  //create var just in case
+
+
+    if(is_blank($user['first_name'])) {
+      $errors[] = "First Name cannot be blank.";
+    } 
+
+    //make sure not blank
+    if(is_blank($user['last_name'])) {
+      $errors[] = "Last Name cannot be blank.";
+    }
+
+    //make sure not blank
+    if(is_blank($user['email'])) {
+      $errors[] = "Email cannot be blank.";
+    } elseif (!has_length($user['email'], array('max' => 255))) {
+      //has to be below 255 characters long
+      $errors[] = "Last name must be less than 255 characters.";
+    } else if (!valid_email_format($user['email'])) {
+      $errors[] = "Email must be a valid format.";
+    }
+
+    return $errors;
+  }
+
+  function validate_registration($user) {
 
     $errors = [];  //create var just in case
 
@@ -126,6 +153,32 @@ $randomid = (rand(10000,20000));
       db_disconnect($db);
         exit;
     }
+
+  }
+
+
+  //add new user to table
+  function update_user($user) {
+    global $db;
+
+    $username = trim($user['username']);
+    $fname = trim($user['first_name']);
+    $lname = trim($user['last_name']);
+    $email = trim($user['email']);
+    $city = trim($user['city']);
+    $schoolid = get_district_id($user['city']);
+
+    // Attempt update query execution
+    $sql = "UPDATE profile SET first_name = '$fname', last_name = '$lname', email = '$email', districtID = '$schoolid', city = '$city' WHERE username = '$username'";
+    $result = mysqli_query($db, $sql) or die('SQL Error: ' . mysqli_error($db));
+    if(mysqli_query($db, $sql)) {
+        echo "Records were updated successfully.";
+    } else {
+        echo "ERROR: Could not able to execute $sql. " . mysqli_error($db);
+    }
+    // Close connection
+    mysqli_close($db);
+    //return true;
 
   }
 

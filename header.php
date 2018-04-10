@@ -37,10 +37,10 @@
           if (isset($_SESSION['username']))
             {
               echo "User: ";
-              echo $_SESSION['username'];
+              echo "<a href='profile.php'>" .$_SESSION['username']. "</a>";
+
             }else{
               echo "";
-            
             } ?>
            ||
           <a href="index.php">Home</a>

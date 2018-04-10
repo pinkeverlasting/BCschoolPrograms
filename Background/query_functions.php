@@ -22,6 +22,21 @@
 
   }
 
+  function get_cities() {
+    global $db;
+
+    //select name and code from the table
+    $sql = "SELECT DISTINCT city FROM schools ORDER BY city";
+    //echo $sql;
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result);
+    return $result;
+
+    database_error();
+    //test
+
+  }
+
   function get_list_of_schools_by_district($district,$id) {
     global $db;
 
@@ -112,7 +127,7 @@
     global $db;
    
     //prevent duplicates
-    $sql = "SELECT city, districtID FROM profile WHERE username = '$username'";
+    $sql = "SELECT first_name, last_name, email, city, districtID FROM profile WHERE username = '$username'";
     //send query to database and get the result
     $result = mysqli_query($db,$sql);
     confirm_result_set($result);
@@ -178,7 +193,7 @@
     //select name and code from the table
     $sql = "SELECT city FROM districts WHERE districtID = '$id'";
 
-    $result = mysqli_query($db, $sql) or die('SQL Error: ' . mysqli_error($db));;
+    $result = mysqli_query($db, $sql) or die('SQL Error: ' . mysqli_error($db));
     confirm_result_set($result);
     return $result;
 

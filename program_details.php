@@ -27,29 +27,42 @@
 
 	//get the data using the ID
 	$result = get_program_details($id);
+  
+
   if(isset($_SESSION['username'])){
-     $username = trim($_SESSION['username']);
-	   $res = get_profile($username);
+           $username = trim($_SESSION['username']);
+      	   $res = get_profile($username);
 
-     if (!$res) {
-     die ('SQL Error: ' . mysqli_error($connection));
-     } else if (!isset($_POST['districtSelect']) || $_POST['districtSelect'] == "") {
+           if (!$res) {
+           die ('SQL Error: ' . mysqli_error($connection));
+           } else if (!isset($_POST['districtSelect']) || $_POST['districtSelect'] == "") {
 
-      //let's just store all the data into vars
-      while($rows = mysqli_fetch_array($res)) {
-        $city = $rows['city'];
-        $district = $rows['districtID'];
-      }
-    } else {
-      $district = $_POST['districtSelect'];
-      $getCity = get_city_with_ID($district);
-      while($rowC = mysqli_fetch_array($getCity)) {
-          $city = $rowC['city'];;
+            //let's just store all the data into vars
+            while($rows = mysqli_fetch_array($res)) {
+              $city = $rows['city'];
+              $district = $rows['districtID'];
+            }
+          } else {
+            $district = $_POST['districtSelect'];
+            $getCity = get_city_with_ID($district);
+            while($rowC = mysqli_fetch_array($getCity)) {
+                $city = $rowC['city'];;
+              }
+          }
+
+              $r = get_list_of_schools_by_district($district, $id) or die ('SQL Error: ' . mysqli_error($connection));
+
+    } else if (is_post() && !isset($_POST['districtSelect'])) {
+
+      if (!$_POST['districtSelect'] == "") {
+            $district = $_POST['districtSelect'];
+            $getCity = get_city_with_ID($district);
+            while($rowC = mysqli_fetch_array($getCity)) {
+                $city = $rowC['city'];;
+              }
+
+            $r = get_list_of_schools_by_district($district, $id) or die ('SQL Error: ' . mysqli_error($connection));
         }
-    }
-
-    $r = get_list_of_schools_by_district($district, $id) or die ('SQL Error: ' . mysqli_error($connection));
-
     }
 
     function load_district($district, $city, $r) {
@@ -60,19 +73,19 @@
           echo "<br>";
         }
 
-  }
-
-	//error
-	if (!$result) {
-     die ('SQL Error: ' . mysqli_error($connection));
-     } else {
-
-    	//let's just store all the data into vars
-    	while($row = mysqli_fetch_array($result)) {
-    	$name = $row['program_type'];
-			$description = $row['program_description'];
-    	}
     }
+
+    	//error
+    	if (!$result) {
+         die ('SQL Error: ' . mysqli_error($connection));
+         } else {
+
+        	//let's just store all the data into vars
+        	while($row = mysqli_fetch_array($result)) {
+        	$name = $row['program_type'];
+    			$description = $row['program_description'];
+        	}
+        }
 
     ?>
 
@@ -118,64 +131,5 @@
     }
 
 ?>
-
-  <?php
-
-
-  /*$username = trim($_SESSION['username']);
-
-            $sql = "SELECT city
-                FROM profile
-                WHERE username = ?";
-
-        $stmt = $db->prepare($sql);
-        $stmt->bind_param('s',$username);
-        $stmt->execute();
-        //get the result from database
-        $stmt->bind_result($city);
-
-        $city_pref = '';
-
-        while($stmt->fetch()){
-
-          $city_pref = $city;
-        }
-
-        echo "<h2>".$city_pref." Schools</h2>";
-        echo "<br>";
-
-            $res = get_list_of_schools();
-
-            while($row = $res->fetch_assoc()){
-
-              if($row["city"] == $city_pref){
-                  echo '<a href="school_details.php?id=' . $row["schoolID"] . '">'.$row["name"].'</a>';
-                  //echo $row["name"];
-                  echo "<br>";
-                //echo $row["name"];
-                //echo "<br>";
-              }
-            }
-
-            $stmt->free_result();*/
-
-            ?>
-
-
-<?php
-/*
- if($res->num_rows > 0)
-    {
-        while ($rows = $res->fetch_assoc()) {
-
-         echo '<a href="programsdetail.php?id=' .$rows["program_type"]. '">' .$rows["program_type"]. '</a>';
-         echo '<br>';
-        } 
-    }
-    else
-    {   
-       echo '<h3> No Programs Offered </h3>';
-
-    } */?> 
 
 </div>

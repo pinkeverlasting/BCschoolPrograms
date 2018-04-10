@@ -59,7 +59,7 @@
 <?php
     while ($rows = $res->fetch_assoc()) {
           //echo $rows['program_type'];
-         echo '<a href="programsdetail.php?id=' .$rows["program_type"]. '">' .$rows["program_type"]. '</a>';
+         echo '<a href="program_details.php?id=' .$rows["program_type"]. '">' .$rows["program_type"]. '</a>';
          echo '<br>';
 		} ?>
 
