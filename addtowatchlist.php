@@ -10,75 +10,67 @@
   require('header.php');
   //unset saved watchlist values
   unset($_SESSION['id']);
-  unset($_SESSION['name']);
+  unset($_SESSION['type']);
 
   //Connect to database
-  $dbhost = "localhost";
-  $dbuser = "root";
-  $dbpass = "";
-  $dbname = "classicmodels";
-  @$db = new mysqli($dbhost,$dbuser,$dbpass,$dbname);
+  db_connect();
 
-  //If there is any error in database
-  if (mysqli_connect_errno()) {
-    echo "Database connection error: ". mysqli_connect_errno();
-  exit();
-}
   //Get the product code and product name stored in the url
     $code = $_GET['id'] ?? '1';
-    $name = $_GET['name'] ?? '';
+    $type = $_GET['program_type'] ?? '';
   //if user is logged in, get user's email
-    if(isset($_SESSION['email'])) $email = $_SESSION['email'];
+    if(isset($_SESSION['username'])) $username = $_SESSION['username'];
       //if email session is set
-      if(isset($_SESSION['email'])){
+      if(isset($_SESSION['username'])){
         //select user's watchlist information through email
         $sql = "SELECT *
-                FROM wishlist
-                WHERE email = ?";
+                FROM bookmark_list
+                WHERE username = ?";
 
         $stmt = $db->prepare($sql);
-        $stmt->bind_param('s',$email);
+        $stmt->bind_param('s',$username);
         $stmt->execute();
         //get the result from database
-        $stmt->bind_result($id,$useremail,$productcode,$productname);
+        $stmt->bind_result($id,$username,$programtype);
         //create an array to check if there is any duplicate product code
         $arr = array();
 
         while($stmt->fetch()){
           //put all user's exist product code in an array
-          array_push($arr,$productcode);
+          $arr["id"] = $id;
+          $arr["program_type"] = $programtype;
 
 
         }
         //if users access watch list through models detail
-        if($code !== '1' && $name !== ''){
+        if($code !== '1' && $type !== ''){
         //if the products is not in watch list
-        if(!in_array($code,$arr)){
+        if(!in_array($code,$arr) && !in_array($type,$arr)){
         //SQL query insert product code and name into wish list table
-        $query_str = "INSERT INTO wishlist ";
-        $query_str.= "(email,productCode,productName) ";
+        $query_str = "INSERT INTO bookmark_list ";
+        $query_str.= "(schoolID,username,program_type) ";
         $query_str.= "VALUES (";
-        $query_str.= "'".$email."',";
         $query_str.= "'".$code."',";
-        $query_str.= "'".$name."'";
+        $query_str.= "'".$username."',";
+        $query_str.= "'".$type."'";
         $query_str.= ")";
         //get the result
         $result = mysqli_query($db,$query_str);
         //if result is true
         if($result) {
-          echo "add product to wishlist successfully";
+          echo "add product to bookmark successfully";
 
 
         } else {
           // INSERT failed
           echo mysqli_error($db);
           db_disconnect($db);
-          echo "add product to wishlist failed";
+          echo "add product to bookmark failed";
           exit;
 
         }}else{
           //show error message if user put duplicate products in watch list
-        echo "Duplicate product in wishlist";
+        echo "Duplicate schools / programs in wishlist";
       }
 
         }
@@ -87,15 +79,15 @@
           echo "<tr><th>Product Name</th><th>&nbsp;</th></tr>";
           //get user's email and send query to database
           $res = $db->prepare($sql);
-          $res->bind_param('s',$email);
+          $res->bind_param('s',$username);
           $res->execute();
-          $res->bind_result($id,$email,$productcode,$productname);
+          $res->bind_result($schoolID,$name,$program_type);
     //get product information and show the result
     while($res->fetch()){
 
       echo "<tr>";
-      echo "<td>".$productname."</td>";
-      echo "<td><a href=\"modelsdetail.php?id=".$productcode."\">View</a></td>";
+      echo "<td>".$name."</td>";
+      echo "<td><a href=\"schooldetail.php?id=".$schoolID."\">View</a></td>";
       echo "</tr>";
 
     }
@@ -112,7 +104,7 @@
     }else{
       //if user didn't log in/register yet, store product code and name into session
       $_SESSION['id'] = $code;
-      $_SESSION['name'] = $name;
+      $_SESSION['type'] = $type;
       header("Location: login.php");
       exit;
     }
