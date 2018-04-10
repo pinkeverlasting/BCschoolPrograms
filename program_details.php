@@ -73,7 +73,7 @@
         echo "<h2>District #".$district." in ".$city."</h2>";
 
         while($rowD = mysqli_fetch_array($r)) {
-          echo '<a href="school_details.php?id=' .$rowD['name']. '">'.$rowD['name'].'</a>';
+          echo '<a href="school_details.php?id=' .$rowD['schoolID']. '">'.$rowD['name'].'</a>';
           echo "<br>";
         }
 
