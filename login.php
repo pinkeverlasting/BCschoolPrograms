@@ -28,12 +28,15 @@
 
       ?>
 
+<div class="register">
     <form class="login" action="" method="post">
 
-      Username: <input type="text" name="username" value=""> <br/>
-      Password: <input type="password" name="password" value=""> <br/>
-      <input type="submit" name="login" value="Log In"> <br/>
-      <a href="register.php">Register here</a>
+
+      <h3>Username:</h3> <input type="text" name="username" value=""> <br/>
+      <h3>Password:</h3> <input type="password" name="password" value=""> <br/>
+      <input type="submit" class="button" name="login" value="Log In"> <br/>
+      <br/>
+      <a class="registerLink" href="register.php">Register here</a>
 
       <?php
       //If user submitted log in form
@@ -106,6 +109,7 @@
        ?>
 
     </form>
+  </div>
 
   </body>
 </html>

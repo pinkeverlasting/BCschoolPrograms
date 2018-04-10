@@ -97,7 +97,6 @@
 }
 
 a{
-
   text-decoration: none;
   color: #000;
 }
@@ -105,6 +104,11 @@ a{
 a:hover{
 
   color: #AAA;
+}
+
+a.registerLink:hover, a.registerLink {
+  text-decoration: underline;
+  padding-top: 5em;
 }
 
 #nav{
@@ -128,6 +132,14 @@ h2{
   letter-spacing: 0.07em;
 
 }
+
+/*.register {
+   /*margin: auto;
+   width: 50%;
+   margin-right: 5em;
+   border: 1em #AAA;
+   padding: 10px;
+}*/
 
 #header-img{
 
@@ -163,4 +175,27 @@ h2{
   font-size: 0.8em;
   letter-spacing: 0.07em;
   width:50%;
+}
+
+.button {
+  background-color: #AAA;
+  border: none;
+  color: white;
+  padding: 0.7em 1em;
+  text-align: center;
+  font-size: 16px;
+  margin-top: 1em;
+  opacity: 0.6;
+  transition: 0.3s;
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.button:hover {opacity: 1}
+
+form {
+  margin: auto;
+  width: 50%;
+
 }

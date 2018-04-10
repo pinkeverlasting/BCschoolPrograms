@@ -30,7 +30,7 @@ $password = '';
 
 <a href="listofprograms.php">
       <div class="option-card">
-        <img src="images/Programs.png" alt="Programs Photo" id="index-img">
+        <img src="images/programs.png" alt="Programs Photo" id="index-img">
         <div class="card-info">
           <h3 class="card-name">List of Youth Program</h3>
           <h4 class="card-title">Discover youth programs provided in BC.</h4>
@@ -39,7 +39,7 @@ $password = '';
 
 <a href="listofschools.php">
       <div class="option-card">
-        <img src="images/districts.png" alt="district Photo" id="index-img">
+        <img src="images/districts.png" alt="District Photo" id="index-img">
         <div class="card-info">
           <h3 class="card-name">By School District</h3>
           <h4 class="card-title">Find programs by School District</h4>
