@@ -133,13 +133,13 @@ h2{
 
 }
 
-/*.register {
-   /*margin: auto;
+.comment {
+   margin: auto;
    width: 50%;
    margin-right: 5em;
    border: 1em #AAA;
    padding: 10px;
-}*/
+}
 
 #header-img{
 
@@ -275,4 +275,24 @@ margin: 1em 2.5em;
 
   margin: 0.5em 0em;
 
+}
+
+.column {
+    float: left;
+    width: 50%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.row img {
+  display: block;
+  margin: auto;
+   width: 50%;
+  padding-top: 4em;
+  max-width: 15em;
 }

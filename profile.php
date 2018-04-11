@@ -85,6 +85,9 @@
 
     ?>
 
+    <div class="row">
+      <div class="column">
+
     <h1>My Profile</h1>
     <?php echo display_errors($errors); 
     if (isset($_SESSION['username'])) {?>
@@ -130,11 +133,16 @@
 
     </form>
 
+
     <?php
   } else {
       echo '<h2> No Profile </h2>';
   }
    ?>
+
+   </div>
+
+    <img src="images/profile.png" alt="Programs Photo" id="index-img">
     
 
 

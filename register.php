@@ -76,6 +76,7 @@
    <?php echo display_errors($errors); ?>
 
     <form action="register.php" method="post">
+    <h3>hasdfasdfafasdfsad</h3>
 
       <!-- name text field -->
         <h3>Username:</h3>

@@ -106,8 +106,8 @@
 
     }
 
-    print_r($school);
-    print_r($program);
+    //print_r($school);
+    //print_r($program);
 
     foreach($school as $value){
     $sch = get_school_names($value);
