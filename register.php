@@ -76,7 +76,6 @@
    <?php echo display_errors($errors); ?>
 
     <form action="register.php" method="post">
-    <h3>hasdfasdfafasdfsad</h3>
 
       <!-- name text field -->
         <h3>Username:</h3>
@@ -108,9 +107,9 @@
           <br/><br/>
 
       <!-- warning for password message-->
-         <p>
-        Passwords should be at least 5 characters and include at least one uppercase letter, lowercase letter, number, and symbol.
-        </p><br/>
+         <h3>
+        Please remember that passwords should be at least 5 characters.
+        </h3><br/>
 
       <!-- password text field -->
         <h3>Password:</h3>
@@ -126,5 +125,6 @@
     </form>
 
 
-</body>
-</html>
+  <?php
+    require('footer.php');
+  ?>

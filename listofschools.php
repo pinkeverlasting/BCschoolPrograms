@@ -149,5 +149,6 @@
 
 <script src="//code.jquery.com/jquery-3.1.0.min.js"></script>
 <!-- <script src="js/filter_function.js"></script> -->
-</body>
-</html>
+  <?php
+    require('footer.php');
+  ?>

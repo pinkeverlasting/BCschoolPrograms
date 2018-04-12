@@ -1,11 +1,8 @@
 
 <!-- Set Page Title if not already set -->
 <?php
+//start session for cookies and etc
  session_start();
-  if(!isset($page_title)) { $page_title = 'Main';
-}
-
-
 ?>
 
 <!-- Start HTML -->
@@ -14,7 +11,7 @@
 <html lang="en">
   <head>
     <!-- Change Page Name depending what page -->
-    <title>BC School Programs - <?php echo $page_title; ?></title>
+    <title>BC School Programs</title>
     <meta charset="utf-8">
     <link rel="stylesheet" media="all" href="style.css">
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">

@@ -50,3 +50,7 @@ $password = '';
 
 
 </div>
+
+  <?php
+    require('footer.php');
+  ?>

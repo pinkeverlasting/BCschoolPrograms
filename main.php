@@ -1,11 +1,11 @@
 <?php
-	//date_default_timezone_set()- Sets the timezone you want to get the date in
-	date_default_timezone_set('Africa/Nairobi');
+	//Sets the timezone, Vancouver since we are in Vancouver
+	date_default_timezone_set('America/Vancouver');
 	
-	//Include database connection
+	//Include database connection etc
 	require('Background/initialize.php');
 	
-	//Include functins page file
+	//Include functions page file
 	include 'comments.php';
 	
 	//Starts the session
@@ -19,37 +19,38 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-	<!-- The form belows allow the user to login and logout before updating or deleting any comments in the website-->
+
 <?php
 
-	//get the id from the URLs
+	//get the school id from the URLs
 	$id = $_GET['id'];
 	
-	//This code checks if user is logged in or logout
+	//This code checks if user is logged in or not
 	if(isset($_SESSION['username'])){
 		
 		//echo 'You are logged in ' .$_SESSION['username']. ', Yay!';
-		$username = $_SESSION['username'];
+		$username = $_SESSION['username'];  //set username to user's name
 	}
 	else{
-		$username = "Anonymous";
+		$username = "Anonymous"; //else they are anonymous
 	}
 ?>
 
 <br> <br>
 
-<!--date()- Displays the date, Y-m-d(Year,Month, Date) H:i:s(Hour, Minute, Second) -->
-<?php //<input type='hidden' name='uid' value='Anonymous'>
-//Inorder to see the form inside the PHP code, use echo"";
-echo "<form method='post' action='".setComments($db)."'>
-		<input type='hidden' name='schoolID' value='".$id."'>
-		<input type='hidden' name='username' value='".$username."'>
-		<textarea name='message'></textarea><br>
-		<button type='submit' class='button' name='commentSubmit'> Comment </button>
-	  </form> <br>";
+<?php 
 
-//The function below is used to get comments from the database
-getComments($db, $id);
+	// Comments form section
+		echo "<form method='post' action='".setComments($db)."'>";  //call set Comments funtion when submit
+		echo "<input type='hidden' name='schoolID' value='".$id."'>"; //save vars school id / username for forms
+		echo "<input type='hidden' name='username' value='".$username."'>"; // as hidden vars from user
+		echo "<textarea name='message'></textarea><br>"; //area for messages
+		echo "<button type='submit' class='button' name='commentSubmit'> Comment </button>"; //submit button
+		echo "</form> <br>";
+
+	//get comments from the database, and display the comments
+		getComments($db, $id);
+	
 ?>
 </body>
 </html>

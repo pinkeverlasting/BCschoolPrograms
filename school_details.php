@@ -81,3 +81,7 @@ db_disconnect($db) ?>
  <div id="display" class="myCustom1">
        <?php require('main.php'); ?>
  </div>
+
+  <?php
+    require('footer.php');
+  ?>
