@@ -54,101 +54,36 @@
       </select>
 
 
+      <?php
+                echo "<br>";
+                echo "<span id=\"filter-title\">Programs Included:</span>";
+                echo "<br>";
+                echo "<div id=\"checkbox-area\">";
+                while($gram = $pro->fetch_assoc()){
 
-        <?php
-          echo "<br>";
-          echo "<span id=\"filter-title\">Programs Included:</span>";
-          echo "<br>";
-          echo "<div id=\"checkbox-area\">";
-          while($gram = $pro->fetch_assoc()){
-
-            echo "<input type=\"checkbox\" id=\"checkbox\" value=\"".$gram["program_type"]."\"><span id=\"check-text\">".$gram["program_type"]."</span>";
+                  echo "<input type=\"checkbox\" id=\"checkbox\" value=\"".$gram["program_type"]."\"><span id=\"check-text\">".$gram["program_type"]."</span>";
 
 
-          }
-
-          echo"</div>";
-
-          echo"<div id=\"school-list\">";
-
-          if(!isset($_SESSION['username'])){
-
-            foreach($arr_dis as $key => $value){
-
-              echo "<h3 id=\"district-title\">District #".$key.": ".$value."</h3>";
-
-              echo "<ul>";
-
-              $res = get_list_of_schools();
-
-              while($row = $res->fetch_assoc()){
-
-                if($key == $row["districtID"]){
-
-                  echo "<li>";
-                  echo '<a href="school_details.php?id=' . $row["schoolID"] . '" id="school-link">'.$row["name"].'</a>';
-                  //echo $row["name"];
-                  echo "<br>";
-                  echo "</li>";
-
-                  $schoolInfo[] = $row;
                 }
 
-            }
+                echo"</div>";
 
-            echo "</ul>";
-          }
+                ?>
 
-          echo"</div>";
+                <input type="button" id="button" value="filter" />
 
-      } else{
+                <div id="show">
+                </div>
 
-          $username = trim($_SESSION['username']);
 
-          $sql = "SELECT city
-              FROM profile
-              WHERE username = ?";
-
-        $stmt = $db->prepare($sql);
-        $stmt->bind_param('s',$username);
-        $stmt->execute();
-        //get the result from database
-        $stmt->bind_result($city);
-
-        $city_pref = '';
-
-        while($stmt->fetch()){
-
-        $city_pref = $city;
-        }
-
-        echo "<h3 id=\"school-title\">".$city_pref." Schools</h3>";
-        echo "<br>";
-
-          $res = get_list_of_schools();
-
-          while($row = $res->fetch_assoc()){
-
-            if($row["city"] == $city_pref){
-
-              //echo $row["name"];
-              //echo "<br>";
-
-               echo '<a href="school_details.php?id=' . $row["schoolID"] . '">'.$row["name"].'</a>';
-                  //echo $row["name"];
-                  echo "<br>";
-            }
-          }
-
-          $stmt->free_result();
-
-        }
-          ?>
+      <script src="//code.jquery.com/jquery-3.1.0.min.js"></script>
+      <script src="js/filter_function.js"></script>
 
 
 
-<script src="//code.jquery.com/jquery-3.1.0.min.js"></script>
 <!-- <script src="js/filter_function.js"></script> -->
   <?php
     require('footer.php');
   ?>
+</body>
+</html>

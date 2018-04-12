@@ -222,14 +222,17 @@
 
   }
 
-  function get_programs_by_school($program_type){
+  function get_programs_by_school($program_type,$district){
     global $db;
 
     $sql = "SELECT name, schools.schoolID, programs_in_schools.year FROM schools ";
     $sql.= "INNER JOIN programs_in_schools ON schools.schoolID = programs_in_schools.schoolID ";
     $sql.= "WHERE schools.schoolID IN ";
     $sql.= "(SELECT schoolID FROM programs_in_schools ";
-    $sql.= "WHERE program_type = '$program_type')";
+    $sql.= "WHERE program_type = '$program_type') ";
+    if(!empty($district)){
+    $sql.= "AND schools.districtID = $district;";
+    }
 
     $result = mysqli_query($db,$sql) or die('SQL Error:'.mysqli_error($db));
     confirm_result_set($result);
