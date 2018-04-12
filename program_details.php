@@ -19,6 +19,7 @@
     //get the id from the URLs
 	 $id = $_GET['id'];
    $type = '';
+   $get_photo = get_names_of_programs($id);
 
   ?>
 
@@ -95,6 +96,12 @@
 
 
 <div id="content">
+<?php 
+    while ($row = $get_photo->fetch_assoc()){ ?>
+             <img src="images/<?php echo $row["image_name"];?>" width="500px"/>
+    <?php  }
+        ?>
+
 <h1> <?php echo $name?></h1>
 <h4> <?php echo 'Description: '?></h4>
 <p> <?php echo $description ?></p>
@@ -141,7 +148,7 @@
 
 ?>
 
-<a href="listofprograms.php" class="button">Back to Model List</a>
+<a href="listofprograms.php" class="button">Back to Programs</a>
 <a href="addtowatchlist.php?type=<?php echo $name;?>" class="button"> Add to Watch List</a>
 
 

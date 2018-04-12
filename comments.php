@@ -44,7 +44,7 @@
 		$sql="SELECT * FROM comments WHERE schoolID = '$school'";
 		
 		// Creates a connection($conn) and then queries everthing selected from comments table
-		$result= $db->query($sql) or die('SQL Error: ' . mysqli_error($db));;
+		$result= $db->query($sql) or die('SQL Error: ' . mysqli_error($db));
 		
 		//$result->fetch_assoc()- Fetches result row from the database as an array
 		//while loop means that everytime we have a result row from the database, it loops until there is no more left
@@ -54,19 +54,19 @@
 			echo "<div class='comment-box'> <p>";
 				
 				//$row['uid']- Echoes name of the user from the database
-				echo $row['username']. "<br>";
+				echo 'User: <h1>' .$row['username']. '</h1><br>';
 				
 				//$row['date']- Echoes date from the database
-				echo $row['date']. "<br>";
+				echo '<p>Date: </p><h4> '.$row['date']. "</h4><br>";
 				
 				//$row['message']- Echoes message from the database
 				//nl2br()- Is a function that converts nl to break statements
-				echo nl2br($row['message']);
+				echo '<p>' .$row['message']. '</p><br>';
 				
 				//The 1st form below deletes user post
 				//The 2nd form below takes information to the next page and updates the database
 			echo "</p> 
-				<form class= 'delete-form' method = 'POST' action = '".deleteComments($db)."'>
+				<form class= 'delete-form' method = 'POST' action = '".deleteComments($db,$school)."'>
 					<input type='hidden' name='id' value='".$row['id']."'>
 					<input type='hidden' name='delete' value='delete'>
 					<button name='commentDelete' class='button'> Delete </button>
@@ -78,16 +78,16 @@
 
 	
 	//Function for deleting comments
-	function deleteComments($db){
+	function deleteComments($db,$school){
 		if(is_post() && isset($_POST['delete'])){
 			$id= $_POST['id'];
 
 			$sql = "DELETE FROM comments ";
 		    $sql .= "WHERE id='" . db_escape($db, $id) . "' ";
-		    $result = mysqli_query($db, $sql);
+		    $result = mysqli_query($db, $sql) or die('SQL Error: ' . mysqli_error($db));
 			
 			//Redirects to the front page
-			header("Location: main.php");
+			header('Location: school_details.php?id='.$school);
 		}
 	}
 	
