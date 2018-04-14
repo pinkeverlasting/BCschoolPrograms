@@ -171,11 +171,12 @@ textarea{
     bottom: 0;
     width: 100%;
     height: 5%;
-    margin: 5em 0 0 15px;
+    padding: 0.2em;
     background-color: #E5E5E5;
     color: white;
     text-align: center;
 }
+
 
 h2{
 
