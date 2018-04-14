@@ -222,17 +222,36 @@
 
   }
 
-  function get_programs_by_school($program_type,$district){
+  function get_programs_by_school($program_type,$district,$year,$type){
     global $db;
 
-    $sql = "SELECT name, schools.schoolID, programs_in_schools.year FROM schools ";
-    $sql.= "INNER JOIN programs_in_schools ON schools.schoolID = programs_in_schools.schoolID ";
-    $sql.= "WHERE schools.schoolID IN ";
-    $sql.= "(SELECT schoolID FROM programs_in_schools ";
-    $sql.= "WHERE program_type = '$program_type') ";
-    if(!empty($district)){
-    $sql.= "AND schools.districtID = $district;";
+    $sql = "SELECT name, schools.schoolID ";
+    if(!empty($program_type)){
+    $sql.= ", programs_in_schools.year, programs_in_schools.program_type ";
     }
+    $sql.= "FROM schools ";
+    if(!empty($program_type)){
+    $sql.= "INNER JOIN programs_in_schools ON schools.schoolID = programs_in_schools.schoolID ";
+    $sql.= "WHERE program_type = '$program_type' ";
+  }
+    if(!empty($district) && !empty($program_type)){
+    $sql.= "AND schools.districtID = $district ";
+  }if(!empty($district) && empty($program_type)){
+    $sql.= "WHERE schools.districtID = $district ";
+  }
+    if(!empty($year)){
+    $sql.= "AND programs_in_schools.year = '$year' ";
+    }
+
+    if(!empty($type) && !empty($program_type)){
+    $sql.= "AND schools.name = '%$type%' ";
+  }if(!empty($type) && empty($program_type)){
+    $sql.= "WHERE schools.name LIKE '%$type%' ";
+  }
+
+
+
+
 
     $result = mysqli_query($db,$sql) or die('SQL Error:'.mysqli_error($db));
     confirm_result_set($result);

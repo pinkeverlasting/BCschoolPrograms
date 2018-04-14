@@ -35,6 +35,7 @@
      $arr_dis = array();
      echo "<span id=\"filter-title\">District:</span>";
      echo "<select id=\"drop-list\" name=\"order\">";
+     echo "<option value=\"\">- Select District -</option>";
      while($num = $dis->fetch_assoc()){
 
        $arr_dis[$num["districtID"]] = $num["name"];
@@ -48,7 +49,8 @@
       ?>
 
       <span id="filter-title">Type of School:</span>
-      <select id="drop-list">
+      <select id="school">
+          <option value="">- Select Type of School -</option>
           <option value="Elementary">Elementary School</option>
           <option value="Secondary">Secondary School</option>
       </select>
@@ -65,7 +67,11 @@
 
 
                 }
-
+                echo "<br>";
+                echo "<span id=\"filter-title\">Program Year:</span>";
+                echo "<br>";
+                echo "<input type=\"checkbox\" id=\"year\" value=\"2012/2013\"><span id=\"check-text\">2012/2013</span>";
+                echo "<input type=\"checkbox\" id=\"year\" value=\"2013/2014\"><span id=\"check-text\">2013/2014</span>";
                 echo"</div>";
 
                 ?>
@@ -73,7 +79,84 @@
                 <input type="button" id="button" value="filter" />
 
                 <div id="show">
+                  <?php
+
+                  
+                    while($num = $dis->fetch_assoc()){
+
+                      $arr_dis[$num["districtID"]] = $num["name"];
+                    }
+
+                    $district = [];
+                    $schoolInfo = [];
+                    if(!isset($_SESSION['username'])){
+
+                      foreach($arr_dis as $key => $value){
+
+                        echo "<h2>District #".$key.": ".$value."</h2>";
+
+
+
+                        $res = get_list_of_schools();
+
+                        while($row = $res->fetch_assoc()){
+
+                          if($key == $row["districtID"]){
+
+                            echo '<a href="school_details.php?id=' . $row["schoolID"] . '">'.$row["name"].'</a>';
+                            //echo $row["name"];
+
+                            echo "<br>";
+
+                  $schoolInfo[] = $row;
+                  }
+
+                  }
+                  }
+                  }else{
+
+                  $username = trim($_SESSION['username']);
+
+                  $sql = "SELECT city
+                  FROM profile
+                  WHERE username = ?";
+
+                  $stmt = $db->prepare($sql);
+                  $stmt->bind_param('s',$username);
+                  $stmt->execute();
+                  //get the result from database
+                  $stmt->bind_result($city);
+
+                  $city_pref = '';
+
+                  while($stmt->fetch()){
+
+                  $city_pref = $city;
+                  }
+
+                  echo "<h2>".$city_pref." Schools</h2>";
+                  echo "<br>";
+
+                    $res = get_list_of_schools();
+
+                    while($row = $res->fetch_assoc()){
+
+                      if($row["city"] == $city_pref){
+
+                        echo $row["name"];
+                        echo "<br>";
+                      }
+
+                    }
+                    $stmt->free_result();
+                  }
+
+
+
+                  db_disconnect($db);
+                  ?>
                 </div>
+
 
 
       <script src="//code.jquery.com/jquery-3.1.0.min.js"></script>

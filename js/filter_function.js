@@ -1,33 +1,22 @@
 var selected = [];
+var boxchecked = [];
+var district;
+
 var proURL;
 
 
 
 
-function checked(){
 
-  var boxes = $("#checkbox");
-
-  for(var i = 0; i < boxes.length; ++i){
-  if(boxes[i].checked){
-
-    selected.push(boxes[i].parentElement.attributes["id"].value);
-    console.log(selected);
-  }
-}
-}
-
-$(function() {
-    checked();
-
-});
-
-
-$("[type=checkbox]").on('click',
+$("[type=checkbox]").click(
   function(event){
-  event.preventDefault();
+  //event.preventDefault();
 
+  if($(event.target).attr('id') == "checkbox"){
   var program_type = "programType[]="+$(event.target).val();
+}else{
+  var program_type = "year="+$(event.target).val();
+}
   var myurl = "js/filter.php";
 
   proURL = program_type;
@@ -45,31 +34,70 @@ $("[type=checkbox]").on('click',
 
 console.log(selected);
 
-if(selected.length > 0){
-  $.ajax({
+});
 
-    type : 'GET',
-    url : myurl,
-    data : { 'programType' : selected },
-    success : function(data){
-      for(var i = 0; i < selected.length; i++){
-       //console.log(selected);
-       if($(event.target).prop('checked')){
-         $(event.target).prop('checked',false);
-       }else{
-         $(event.target).prop('checked',true);
-       }
-     }
 
+$("#drop-list").change(function(){
+
+var string = 'district=';
+  if(this.value !== ''){
+  district = "district="+this.value;
+
+
+  $.each(selected,function(key,val){
+    if(val.includes(string)){
+      selected.splice(val,1);
+      console.log("yes");
+    }
+  });
+  selected.push(district);
+  console.log(selected);
+  //console.log(district);
+}else{
+  $.each(selected,function(key,val){
+    if(val.includes(string)){
+      selected.splice(val,1);
+      console.log(selected);
     }
   });
 }
+
 });
+
+$("#school").change(function(){
+  var string = 'type=';
+  if(this.value !== ''){
+  var type = "type="+this.value;
+
+
+  $.each(selected,function(key,val){
+    if(val.includes(string)){
+      selected.splice(val,1);
+      console.log("yes");
+    }
+  });
+  selected.push(type);
+  console.log(selected);
+}else{
+
+  $.each(selected,function(key,val){
+    if(val.includes(string)){
+      selected.splice(val,1);
+      console.log(selected);
+    }
+  });
+
+}
+
+});
+
 
 $("#button").click(
  function(event){
 
    event.preventDefault();
+   var string = "year=";
+   
    $('#show').empty();
  var query = selected.join('&');
  var myUrl = "js/filter.php?"+query;
@@ -83,9 +111,11 @@ $("#button").click(
    $.each(parsed,function(key,val){
 
 
-
-     result.push('<a href="school_details.php?id='+val.code+'">' + val.name + '</a><br>');
-
+     if(val.type == ''){
+    result.push('<a href="school_details.php?id='+val.code+'">' + val.name + '</a><br>');
+     }else{
+     result.push('<a href="school_details.php?id='+val.code+'">' + val.name + '</a>(' + val.type + ',' + val.year + ')<br>');
+   }
      //result = $('<a href="school_details.php?id='+ data.code + '">' + data.name + '</a>');
 
 
