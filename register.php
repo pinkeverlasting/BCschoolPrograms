@@ -39,9 +39,9 @@
         //run user validations and make the query
         $result = add_user($user);
 
-
-        //if result is true which means validated, then insert it
-        if($result) {
+        if (is_array($result)) {
+          $errors = $result;
+        } else {
           $new_id = mysqli_insert_id($db); //insert it into the db
 
           //create sessions
@@ -49,10 +49,6 @@
 
           //redirect user
           header('Location: index.php');
-
-        } else {
-          //show the sql error
-          $errors = $result;
         }
 
       } else {
