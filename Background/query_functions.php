@@ -249,10 +249,6 @@
     $sql.= "WHERE schools.name LIKE '%$type%' ";
   }
 
-
-
-
-
     $result = mysqli_query($db,$sql) or die('SQL Error:'.mysqli_error($db));
     confirm_result_set($result);
     return $result;
