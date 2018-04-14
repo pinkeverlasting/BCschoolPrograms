@@ -81,7 +81,7 @@
                 <div id="show">
                   <?php
 
-                  
+
                     while($num = $dis->fetch_assoc()){
 
                       $arr_dis[$num["districtID"]] = $num["name"];
@@ -90,6 +90,7 @@
                     $district = [];
                     $schoolInfo = [];
                     if(!isset($_SESSION['username'])){
+                        if(!isset($_SESSION['city'])){
 
                       foreach($arr_dis as $key => $value){
 
@@ -113,6 +114,25 @@
 
                   }
                   }
+                }else{
+                    $city_session = $_SESSION['city'];
+                  echo "<h2>".$city_session." Schools</h2>";
+                  echo "<br>";
+
+                    $res = get_list_of_schools();
+
+                    while($row = $res->fetch_assoc()){
+
+                      if($row["city"] == $city_session){
+
+                        echo $row["name"];
+                        echo "<br>";
+                      }
+
+                    }
+
+
+                }
                   }else{
 
                   $username = trim($_SESSION['username']);
