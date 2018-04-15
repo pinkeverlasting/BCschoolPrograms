@@ -11,7 +11,7 @@
 
     require('header.php');
 
-    db_connect();
+    db_connect(); //connect to the data
     $res = get_list_of_programs();  //get array data for list of programs names, descriptions and images
     ?>
 <h2> Program List </h2>
@@ -19,14 +19,14 @@
 
     <?php
 
-    //loop the array 
+    //loop the array
     while ($row = $res->fetch_assoc()){ ?>
 
          <!-- use html to stylize  -->
          <div id="program-card">
          <!-- display image  -->
-         <img src="images/<?php echo $row["image_name"];?>" width="500px"/> 
-         <!-- link users to the programs details page and add program's name to url end  --> 
+         <img src="images/<?php echo $row["image_name"];?>" width="500px"/>
+         <!-- link users to the programs details page and add program's name to url end  -->
          <h3><a href="program_details.php?id=<?php echo $row["program_type"]; ?>"><?php echo $row["program_type"]; ?></a></h3>
          <br>
         <!-- display the description for the program  -->

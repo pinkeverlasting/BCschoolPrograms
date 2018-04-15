@@ -37,11 +37,12 @@
         $programs_arr = array();
 
         while($stmt->fetch()){
-          //put all user's exist product code in an array
+          //put all user's school to an arry
           if(!empty($id)){
           array_push($school_arr,$id);
         }
         if(!empty($programtype)){
+          //put all user's program to an array
           array_push($programs_arr,$programtype);
         }
 
@@ -50,7 +51,7 @@
         if($code !== '' || $type !== ''){
         //if the products is not in watch list
         if(!in_array($code,$school_arr) && !in_array($type,$programs_arr)){
-        //SQL query insert product code and name into wish list table
+        //SQL query insert program or school into wish list table
         $query_str = "INSERT INTO bookmark_list ";
         $query_str.= "(schoolID,username,program_type) ";
         $query_str.= "VALUES (";
@@ -78,10 +79,10 @@
       }
 
         }
-          //create table to show user's watch list information
+          //create table to show user's favorite list information
           echo "<table>";
           echo "<tr><th>Your Favorite Schools / Programs</th><th>&nbsp;</th></tr>";
-          //get user's email and send query to database
+          //get username and send query to database
           $res = $db->prepare($sql);
           $res->bind_param('s',$username);
           $res->execute();
@@ -92,8 +93,9 @@
     $program = array();
     while($res->fetch()){
 
+     //if there is school saved in favorite list
       if(!empty($schoolID)){
-
+        //push in to an school array
         array_push($school,$schoolID);
 
       }
@@ -109,11 +111,13 @@
     //print_r($school);
     //print_r($program);
 
+    // for each school store in school array
     foreach($school as $value){
+      //get school information
     $sch = get_school_names($value);
 
     while($num = $sch->fetch_assoc()){
-
+      //display the link of the school
       echo "<tr>";
       echo "<td>".$num["name"]."</td>";
       echo "<td><a href=\"school_details.php?id=".$value."\">View</a></td>";

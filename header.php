@@ -36,14 +36,18 @@
 
           db_connect();
 
+          //if user logged in
           if (isset($_SESSION['username']))
             {
+              //show username
               echo "<span id=\"nav\">User: </span>";
               echo "<a href='profile.php' id=\"nav\">" .$_SESSION['username']. "</a>";
               echo "|";
             }else{
+              //else show city preference for non member
               echo "<span id=\"nav\">City: </span>";
               echo "<select id=\"city-pref\">";
+              //if user set their city
               if(isset($_SESSION['city'])){
                 echo "<option value=\"".$_SESSION['city']."\">".$_SESSION['city']."</option>";
               }else{
@@ -51,9 +55,7 @@
               }
               $resultCity = get_cities();
               while($row = $resultCity -> fetch_assoc()){
-                //output data from each row
-
-
+                //output city data for each row
                   echo '<option value="'.$row['city'].'">' . $row["city"] . '</option>';
                 }
               }
@@ -93,12 +95,11 @@
     </div>
 
     <script>
-
+    //if the user selected a city
     $("#city-pref").change(function(){
-
-        console.log("yo");
+      //get city value
         var city_val = this.value;
-
+        //send data to session php and set the city session
         $.ajax({
            type: 'GET',
            url: 'session.php', // change url as your

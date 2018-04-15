@@ -240,14 +240,16 @@
     $sql.= "WHERE schools.districtID = $district ";
   }
     if(!empty($year)){
-    $sql.= "AND programs_in_schools.year = '$year' ";
+    $sql.= "AND year = '$year' ";
     }
 
     if(!empty($type) && !empty($program_type)){
-    $sql.= "AND schools.name = '%$type%' ";
+    $sql.= "AND name LIKE '%$type%' ";
   }if(!empty($type) && empty($program_type)){
     $sql.= "WHERE schools.name LIKE '%$type%' ";
   }
+
+
 
     $result = mysqli_query($db,$sql) or die('SQL Error:'.mysqli_error($db));
     confirm_result_set($result);
